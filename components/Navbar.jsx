@@ -34,7 +34,7 @@ export default function Navbar() {
         <div className="navbar-inner container">
           {/* Logo */}
           <Link href="/" className="navbar-logo">
-            <img src="/assets/logo.png" alt="HungryBuzz" className="logo-img" />
+            <img src="/assets/logo.png" alt="Sainik Rasoi" className="logo-img" />
           </Link>
 
           {/* Desktop Nav */}

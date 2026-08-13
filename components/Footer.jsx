@@ -9,9 +9,10 @@ export default function Footer() {
       <div className="footer-top">
         <div className="container footer-grid">
           {/* Brand */}
-          <div className="footer-brand">
-            <img src="/assets/logo.png" alt="HungryBuzz" className="footer-logo" />
-            <p className="footer-tagline">
+          <Link href="/" className="footer-brand">
+            <img src="/assets/logo.png" alt="Sainik Rasoi" className="footer-logo" />
+          </Link>
+          <p className="footer-tagline">
               A culinary journey that celebrates authentic flavors, beautiful ambience, and the joy of fine dining since 1975.
             </p>
             <div className="footer-social">

@@ -34,7 +34,7 @@ export default function Sidebar() {
 
         {/* Logo */}
         <div className="sidebar-logo">
-          <img src="/assets/logo.png" alt="HungryBuzz" />
+          <img src="/assets/logo.png" alt="Sainik Rasoi" />
         </div>
 
         <div className="sidebar-divider" />
