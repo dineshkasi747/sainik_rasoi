@@ -251,6 +251,11 @@ img { max-width: 100%; height: auto; display: block; }
   background: rgba(31, 25, 23, 0.6);
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* ===== LOADING ===== */
 .loader-wrapper {
   position: fixed;
