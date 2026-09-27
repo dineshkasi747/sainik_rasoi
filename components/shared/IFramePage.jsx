@@ -12,7 +12,7 @@ export default function IFramePage({ src }) {
           outline: 'none',
           display: 'block'
         }}
-        title="HungryBuzz Page"
+        title="Sainik Rasoi Page"
       />
     </div>
   )

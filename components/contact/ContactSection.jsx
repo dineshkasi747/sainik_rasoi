@@ -66,7 +66,7 @@ export default function ContactSection() {
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="HungryBuzz Location"
+                title="Sainik Rasoi Location"
               />
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function ContactSection() {
                       id="contact-phone"
                       type="tel"
                       name="phone"
-                      placeholder="+1 (555) 000-0000"
+                      placeholder="+91 98765 43210"
                       value={form.phone}
                       onChange={handleChange}
                     />

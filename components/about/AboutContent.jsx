@@ -6,19 +6,19 @@ export default function AboutContent() {
       <div className="container">
         <div className="about-content-grid">
           <div className="about-left reveal-left">
-            <span className="section-tag">Since 1975</span>
-            <h2 className="section-title">About <span className="accent">Us</span></h2>
+            <span className="section-tag">🌱 100% Pure Vegetarian</span>
+            <h2 className="section-title">About <span className="accent">Sainik Rasoi</span></h2>
             <div className="title-line" />
             <h3 className="about-sub">
-              We have Started Our Journey to<br />Serve You from 1975
+              Authentic Pure Vegetarian<br />Culinary Excellence
             </h3>
           </div>
           <div className="about-right reveal-right">
             <p>
-              For over four decades, we have embarked on a remarkable journey dedicated to serving our valued customers. Since our establishment in 1975, our unwavering commitment to excellence has guided us every step of the way. Today, we stand proud as a leading provider in our industry, ready to meet your needs with unparalleled expertise and passion.
+              At Sainik Rasoi, we have dedicated ourselves to serving authentic, 100% pure vegetarian culinary delicacies prepared with utmost devotion, farm-fresh ingredients, and traditional Indian spices. Our kitchen is founded on the timeless philosophy of purity, uncompromised taste, and royal hospitality.
             </p>
             <p>
-              From our humble beginnings, we recognized the importance of building strong relationships with our customers. We understood that trust and loyalty were the pillars upon which successful businesses are built.
+              From rich signature paneer gravies and slow-cooked dals to hot tawa phulkas, stuffed parathas, wholesome thalis, crispy starters, and sweet delicacies, every dish is an ode to authentic Indian culinary heritage.
             </p>
           </div>
         </div>

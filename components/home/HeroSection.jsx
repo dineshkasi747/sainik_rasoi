@@ -5,25 +5,25 @@ import AnimatedSection from '@/components/shared/AnimatedSection'
 const slides = [
   {
     id: 1,
-    subtitle: 'Enjoy delicious Food with friends & Family',
-    title: 'Welcome to our Hungrybuzz',
-    desc: "We hope you're hungry because our brand new Buzz Poke Bowls are both delicious and packed with feel good nutrients!",
+    subtitle: '🌱 100% Pure Vegetarian Restaurant',
+    title: 'Welcome to Sainik Rasoi',
+    desc: 'Experience the authentic richness of pure vegetarian culinary tradition with fresh ingredients, fragrant spices, and royal Indian recipes.',
     buttonText: 'Check Our Menu',
     img: '/assets/product-light.png',
   },
   {
     id: 2,
-    subtitle: 'Enjoy delicious Food with friends & Family',
-    title: 'Get The Taste of Multicuisines',
-    desc: "We hope you're hungry because our brand new Buzz Poke Bowls are both delicious and packed with feel good nutrients!",
+    subtitle: 'Pure Indian Desi Flavors & Tandoori Delicacies',
+    title: '100% Pure Veg Delicacies',
+    desc: 'From rich Paneer Butter Masala and Dal Makhani to hot stuffed Parathas and sizzling starters, enjoy true homestyle taste.',
     buttonText: 'Check Our Menu',
     img: '/assets/Layer-791.png',
   },
   {
     id: 3,
-    subtitle: 'Enjoy delicious Food with friends & Family',
-    title: 'Enjoy great Food with loved ones',
-    desc: "We hope you're hungry because our brand new Buzz Poke Bowls are both delicious and packed with feel good nutrients!",
+    subtitle: 'Wholesome Meals for the Entire Family',
+    title: 'Authentic Indian Rasoi Flavors',
+    desc: 'Celebrate every moment with our royal Rasoi Special Thalis, crispy snacks, rich paneer gravies and delightful desserts.',
     buttonText: 'Check Our Menu',
     img: '/assets/Layer-837.png',
   }
@@ -109,7 +109,7 @@ export default function HeroSection() {
 
             {/* Food Plate */}
             <AnimatedSection animationClass="animate-fadeInRight" delayClass="delay-200" className="hero-plate">
-              <img src={slide.img} alt="Delicious Poke Bowl" />
+              <img src={slide.img} alt={slide.title} />
               
               {/* Rotating curved text overlay */}
               <div className="rotating-text-wrapper">

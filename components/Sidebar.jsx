@@ -41,7 +41,7 @@ export default function Sidebar() {
 
         {/* About */}
         <div className="sidebar-about">
-          <p>Experience the finest culinary journey since 1975. Authentic flavors, beautiful ambience, and unforgettable dining moments await you.</p>
+          <p>Welcome to Sainik Rasoi. Experience authentic 100% pure vegetarian culinary traditions with royal flavors, fresh ingredients, and unforgettable family dining moments.</p>
         </div>
 
         <div className="sidebar-divider" />

@@ -9,11 +9,12 @@ export default function Footer() {
       <div className="footer-top">
         <div className="container footer-grid">
           {/* Brand */}
-          <Link href="/" className="footer-brand">
-            <img src="/assets/logo.png" alt="Sainik Rasoi" className="footer-logo" />
-          </Link>
-          <p className="footer-tagline">
-              A culinary journey that celebrates authentic flavors, beautiful ambience, and the joy of fine dining since 1975.
+          <div className="footer-col footer-brand-col">
+            <Link href="/" className="footer-brand">
+              <img src="/assets/logo.png" alt="Sainik Rasoi" className="footer-logo" />
+            </Link>
+            <p className="footer-tagline">
+              A culinary journey that celebrates authentic 100% pure vegetarian flavors, royal ambience, and the joy of family dining.
             </p>
             <div className="footer-social">
               {Object.entries(contactInfo.social).map(([key, href]) => (
@@ -71,7 +72,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container footer-bottom-inner">
           <p className="footer-copy">
-            © {new Date().getFullYear()} HungryBuzz. All Rights Reserved. Crafted with ❤️ for Fine Dining.
+            © {new Date().getFullYear()} Sainik Rasoi. All Rights Reserved. 100% Pure Vegetarian Restaurant.
           </p>
         </div>
       </div>

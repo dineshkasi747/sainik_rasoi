@@ -11,10 +11,10 @@ export default function AboutPreview() {
           {/* Images */}
           <AnimatedSection animationClass="animate-fadeInLeft" className="about-preview-images">
             <div className="img-primary">
-              <img src="/assets/about1-1000x1400.jpg" alt="Restaurant dining" />
+              <img src="/assets/food/about_image.jpg" alt="Sainik Rasoi Traditional Kitchen" />
             </div>
             <div className="img-secondary">
-              <img src="/assets/about2.jpg" alt="Fine dining" />
+              <img src="/assets/food/cat_thali.jpg" alt="Royal Vegetarian Feast" />
               <div className="img-badge">
                 <span className="badge-number">50</span>
                 <span className="badge-text">Years of Excellence</span>
@@ -24,36 +24,36 @@ export default function AboutPreview() {
 
           {/* Content */}
           <AnimatedSection animationClass="animate-fadeInRight" className="about-preview-content">
-            <span className="section-tag">Our Story</span>
+            <span className="section-tag">🌱 100% Pure Vegetarian</span>
             <h2 className="section-title">
-              We have Started Our Journey to<br />
-              <span className="accent">Serve You</span> from 1975
+              The Legacy of Authentic<br />
+              <span className="accent">Pure Veg Dining</span>
             </h2>
             <div className="title-line"></div>
             <p className="section-desc">
-              For over four decades, we have embarked on a remarkable journey dedicated to serving our valued customers. Since our establishment in 1975, our unwavering commitment to excellence has guided us every step of the way.
+              At Sainik Rasoi, we are dedicated to crafting authentic 100% pure vegetarian culinary masterpieces. With time-honored Indian recipes, farm-fresh ingredients, and uncompromised purity, we bring royal homestyle flavors to your table.
             </p>
             <p className="about-desc-2">
-              From our humble beginnings, we recognized the importance of building strong relationships with our customers. We understood that trust and loyalty were the pillars upon which successful businesses are built.
+              From our rich and creamy paneer curries to slow-simmered dals, hot tawa phulkas, stuffed parathas, and golden snacks, every meal is prepared with fresh spices, hygienic care, and heartwarming hospitality.
             </p>
             <div className="about-stats">
               <div className="stat">
-                <span className="stat-num">50+</span>
-                <span className="stat-label">Years of Experience</span>
+                <span className="stat-num">100%</span>
+                <span className="stat-label">Pure Veg</span>
               </div>
               <div className="stat-divider" />
               <div className="stat">
-                <span className="stat-num">12k+</span>
-                <span className="stat-label">Happy Customers</span>
+                <span className="stat-num">60+</span>
+                <span className="stat-label">Menu Delicacies</span>
               </div>
               <div className="stat-divider" />
               <div className="stat">
-                <span className="stat-num">120+</span>
-                <span className="stat-label">Menu Items</span>
+                <span className="stat-num">15k+</span>
+                <span className="stat-label">Happy Guests</span>
               </div>
             </div>
             <Link href="/about" className="btn btn-dark">
-              Discover More
+              Discover Our Story
             </Link>
           </AnimatedSection>
         </div>

@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'HungryBuzz — Fine Dining Restaurant',
-  description: 'Experience the finest culinary journey since 1975.',
+  title: 'Sainik Rasoi — 100% Pure Vegetarian Restaurant',
+  description: 'Experience authentic 100% pure vegetarian culinary delicacies prepared with fresh ingredients, fragrant spices and royal Indian tradition.',
 }
 
 export default function RootLayout({ children }) {

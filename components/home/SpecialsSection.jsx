@@ -37,25 +37,25 @@ export default function SpecialsSection() {
           <div className="specials-cards">
             {[
               {
-                img: '/assets/tip2-1200x794.jpg',
+                img: '/assets/food/paneer_butter_masala.jpg',
                 tag: 'Signature',
-                title: 'Wagyu Beef Tenderloin',
-                desc: 'Premium grade Wagyu beef, slow-cooked to perfection and served with truffle jus.',
-                price: '$89',
+                title: 'Paneer Butter Masala',
+                desc: 'Rich and creamy tomato-butter curry loaded with soft cottage cheese cubes and fresh fenugreek.',
+                price: '₹210',
               },
               {
-                img: '/assets/tip3-1200x794.jpg',
-                tag: 'Seasonal',
-                title: 'Saffron Seafood Bisque',
-                desc: 'A rich, velvety bisque crafted from the freshest catches of the season.',
-                price: '$45',
+                img: '/assets/food/paneer_thali.jpg',
+                tag: 'Thali Special',
+                title: 'Rasoi Special Paneer Thali',
+                desc: 'Royal platter with Paneer Butter Masala, Dal Makhani, 4 Butter Phulkas, Jeera Rice, Raita & Gulab Jamun.',
+                price: '₹200',
               },
               {
-                img: '/assets/tip4-1200x794.jpg',
+                img: '/assets/food/dal_makhani.jpg',
                 tag: "Chef's Pick",
-                title: 'Truffle Mushroom Risotto',
-                desc: 'Creamy Arborio rice with wild mushrooms and shaved black truffle.',
-                price: '$56',
+                title: 'Dal Makhani & Butter Naan',
+                desc: 'Slow-cooked black lentils simmered overnight with cream and butter, paired with clay-oven naan.',
+                price: '₹225',
               },
             ].map((special, i) => (
               <AnimatedSection animationClass="revealed" className="special-card reveal" key={i}>
@@ -67,8 +67,8 @@ export default function SpecialsSection() {
                   <h3 className="special-title">{special.title}</h3>
                   <p className="special-desc">{special.desc}</p>
                   <div className="special-footer">
-                    <span className="special-price">{special.price}</span>
-                    <Link href="/menu" className="special-link">Order Now →</Link>
+                    <span className="special-badge">🌱 Pure Veg</span>
+                    <Link href="/menu" className="special-link">Order via WhatsApp →</Link>
                   </div>
                 </div>
               </AnimatedSection>
@@ -172,11 +172,15 @@ export default function SpecialsSection() {
           padding-top: 16px;
           border-top: 1px solid var(--seventh-color);
         }
-        .special-price {
-          font-family: var(--font-heading);
-          font-size: 1.3rem;
+        .special-badge {
+          font-family: var(--font-body);
+          font-size: 0.78rem;
           font-weight: 700;
-          color: var(--secondary-color);
+          color: #2e7d32;
+          background: #e8f5e9;
+          padding: 4px 10px;
+          border-radius: 20px;
+          letter-spacing: 0.5px;
         }
         .special-link {
           font-size: 0.82rem;
