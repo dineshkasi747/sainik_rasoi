@@ -9,7 +9,7 @@ const slides = [
     title: 'Welcome to Sainik Rasoi',
     desc: 'Experience the authentic richness of pure vegetarian culinary tradition with fresh ingredients, fragrant spices, and royal Indian recipes.',
     buttonText: 'Check Our Menu',
-    img: '/assets/product-light.png',
+    img: '/assets/thali_single_curry_1.png',
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const slides = [
     title: '100% Pure Veg Delicacies',
     desc: 'From rich Paneer Butter Masala and Dal Makhani to hot stuffed Parathas and sizzling starters, enjoy true homestyle taste.',
     buttonText: 'Check Our Menu',
-    img: '/assets/Layer-791.png',
+    img: '/assets/thali_single_curry_2.png',
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const slides = [
     title: 'Authentic Indian Rasoi Flavors',
     desc: 'Celebrate every moment with our royal Rasoi Special Thalis, crispy snacks, rich paneer gravies and delightful desserts.',
     buttonText: 'Check Our Menu',
-    img: '/assets/Layer-837.png',
+    img: '/assets/thali_single_curry_3.png',
   }
 ]
 
