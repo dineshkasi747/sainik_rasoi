@@ -258,6 +258,40 @@
       container.innerHTML = html;
     }
 
+    toggleTheme() {
+      const isDark = document.body.classList.toggle('dark-mode');
+      try {
+        localStorage.setItem('mode', isDark ? 'dark' : 'light');
+      } catch(e) {}
+      this.syncThemeUI();
+    }
+
+    syncThemeUI() {
+      let isDark = document.body.classList.contains('dark-mode');
+      try {
+        const saved = localStorage.getItem('mode');
+        if (saved === 'dark' && !isDark) {
+          document.body.classList.add('dark-mode');
+          isDark = true;
+        } else if (saved === 'light' && isDark) {
+          document.body.classList.remove('dark-mode');
+          isDark = false;
+        }
+      } catch(e) {}
+
+      const sunIcon = document.querySelector('.sainik-theme-sun');
+      const moonIcon = document.querySelector('.sainik-theme-moon');
+      if (sunIcon && moonIcon) {
+        if (isDark) {
+          moonIcon.classList.add('active');
+          sunIcon.classList.remove('active');
+        } else {
+          sunIcon.classList.add('active');
+          moonIcon.classList.remove('active');
+        }
+      }
+    }
+
     updateUI() {
       const total = this.getTotalCount();
 
@@ -265,11 +299,11 @@
       const floatBar = document.getElementById('sainik-floating-cart-bar');
       const floatCount = document.getElementById('sainik-float-count');
       if (floatBar && floatCount) {
-        floatCount.innerText = total + (total === 1 ? ' Item' : ' Items');
-        floatBar.style.display = total > 0 ? 'inline-flex' : 'none';
+        floatCount.innerText = (total === 0 ? '1' : total) + ((total === 0 || total === 1) ? ' Item' : ' Items');
+        floatBar.style.display = 'inline-flex';
       }
 
-      // Add helper class to body for dual button positioning
+      // Add helper class to body
       if (total > 0) {
         document.body.classList.add('sainik-has-cart');
       } else {
@@ -288,6 +322,7 @@
       }
 
       this.renderDrawerItems();
+      this.syncThemeUI();
     }
 
     checkoutWhatsApp() {
@@ -381,6 +416,7 @@
       });
 
       this.updateUI();
+      this.syncThemeUI();
     }
   }
 
@@ -512,6 +548,7 @@
     }
 
     updateActivePills() {
+      const allBtn = document.querySelector('.sainik-cat-pill-all');
       document.querySelectorAll('.sainik-cat-pill-item').forEach(pill => {
         const id = pill.getAttribute('data-cat-id');
         if (id === this.activeId) {
@@ -523,6 +560,13 @@
           pill.classList.remove('active');
         }
       });
+      if (allBtn) {
+        if (!this.activeId || this.activeId === 'all') {
+          allBtn.classList.add('active');
+        } else {
+          allBtn.classList.remove('active');
+        }
+      }
     }
 
     bindScrollSpy() {

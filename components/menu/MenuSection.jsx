@@ -16,25 +16,63 @@ export default function MenuSection() {
   return (
     <section className="menu-section section-padding">
       <div className="container">
-        {/* Category Tabs */}
-        <div className="menu-tabs reveal">
-          <button
-            type="button"
-            className="menu-tab-browse-btn"
-            onClick={() => setIsCategorySheetOpen(true)}
-            title="Browse all categories"
-          >
-            ☰ Browse Menu ({menuCategories.length})
-          </button>
-          {menuCategories.map((cat) => (
+        {/* Category Tabs (Matching Image 1) */}
+        <div className="sainik-sticky-cat-bar">
+          <div className="sainik-cat-pills-scroll">
             <button
-              key={cat.id}
-              className={`menu-tab ${activeCategory === cat.id ? 'active' : ''}`}
-              onClick={() => setActiveCategory(cat.id)}
+              type="button"
+              className={`sainik-cat-pill-all ${!activeCategory || activeCategory === 'all' ? 'active' : ''}`}
+              onClick={() => setIsCategorySheetOpen(true)}
+              title="Browse all categories"
             >
-              {cat.title}
+              <span className="sainik-pill-all-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <circle cx="4" cy="6" r="1.5" fill="currentColor"></circle>
+                  <circle cx="4" cy="12" r="1.5" fill="currentColor"></circle>
+                  <circle cx="4" cy="18" r="1.5" fill="currentColor"></circle>
+                </svg>
+              </span>
+              <span className="sainik-pill-all-text">All</span>
             </button>
-          ))}
+            {menuCategories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                className={`sainik-cat-pill-item ${activeCategory === cat.id ? 'active' : ''}`}
+                onClick={() => handleSelectCategory(cat.id)}
+              >
+                <span className="sainik-cat-pill-icon">
+                  {cat.id === 'starters' && (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 11h16a1 1 0 0 1 1 1 7 7 0 0 1-14 0 1 1 0 0 1 1-1z"></path>
+                      <path d="M7 8V4"></path>
+                      <path d="M12 7V3"></path>
+                      <path d="M17 8V4"></path>
+                    </svg>
+                  )}
+                  {cat.id === 'snacks' && (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 3l9 16H3L12 3z"></path>
+                      <path d="M9 14h.01"></path>
+                      <path d="M15 15h.01"></path>
+                      <path d="M12 11h.01"></path>
+                    </svg>
+                  )}
+                  {cat.id !== 'starters' && cat.id !== 'snacks' && (
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="9"></circle>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                  )}
+                </span>
+                <span className="sainik-cat-pill-name">{cat.title}</span>
+                <span className="cat-pill-count">{cat.items.length}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Section Header */}
@@ -94,17 +132,73 @@ export default function MenuSection() {
         </div>
       </div>
 
-      {/* Floating MENU Button */}
+      {/* Unified Floating Cart & WhatsApp Order Bar with Theme Switcher (Matching Image 2) */}
       <div
-        className="sainik-react-menu-floating-btn"
-        onClick={() => setIsCategorySheetOpen(true)}
+        className="sainik-floating-bar"
+        onClick={() => {
+          if (typeof window !== 'undefined' && window.sainikCart) {
+            window.sainikCart.open()
+          }
+        }}
         role="button"
-        aria-label="Browse Menu Categories"
+        aria-label="View Order Selection"
       >
-        <div className="sainik-menu-pill">
-          <span className="sainik-menu-icon">🍽️</span>
-          <span className="sainik-menu-pill-text">MENU</span>
-          <span className="sainik-menu-pill-count">{menuCategories.length}</span>
+        <div className="sainik-float-pill">
+          <div className="sainik-float-info">
+            <svg className="sainik-float-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span className="sainik-float-count-badge" id="sainik-float-count">1 Item</span>
+          </div>
+          <div className="sainik-float-sep"></div>
+          <button
+            type="button"
+            className="sainik-float-cta"
+            onClick={(e) => {
+              e.stopPropagation()
+              if (typeof window !== 'undefined' && window.sainikCart) {
+                window.sainikCart.open()
+              }
+            }}
+          >
+            <svg className="sainik-float-wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.892.812 2.796.812 3.179 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.07-1.107-.063-.267-.086-.599-.214-1.028-.399-1.815-.783-3.003-2.617-3.094-2.739-.091-.122-.741-.986-.741-1.881 0-.895.469-1.334.636-1.517.167-.183.365-.228.487-.228.122 0 .243.002.349.007.113.005.263-.043.411.312.153.365.518 1.263.563 1.355.045.091.076.198.015.32-.061.122-.091.198-.183.305-.091.107-.193.239-.275.32-.092.091-.188.19-.081.373.107.183.475.783 1.019 1.268.701.625 1.291.819 1.474.91.183.091.29.076.396-.046.107-.122.457-.533.579-.716.122-.183.244-.152.411-.091.167.061 1.065.502 1.248.594.183.091.305.137.35.213.046.076.046.442-.098.847zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.662 1.442 5.177L2 22l4.981-1.307A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.154c-1.636 0-3.151-.487-4.423-1.326l-.317-.208-2.955.775.789-2.88-.228-.363A8.118 8.118 0 013.846 12c0-4.496 3.658-8.154 8.154-8.154s8.154 3.658 8.154 8.154-3.658 8.154-8.154 8.154z"/>
+            </svg>
+            <span>Order on WhatsApp</span>
+            <span className="sainik-float-arrow">→</span>
+          </button>
+          <div
+            className="sainik-float-theme-toggle"
+            onClick={(e) => {
+              e.stopPropagation()
+              if (typeof window !== 'undefined' && window.sainikCart) {
+                window.sainikCart.toggleTheme()
+              }
+            }}
+            role="button"
+            aria-label="Toggle Dark/Light Mode"
+          >
+            <div className="sainik-theme-pill-track">
+              <span className="sainik-theme-icon sainik-theme-sun active">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <line x1="12" y1="2" x2="12" y2="4"></line>
+                  <line x1="12" y1="20" x2="12" y2="22"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="2" y1="12" x2="4" y2="12"></line>
+                  <line x1="20" y1="12" x2="22" y2="12"></line>
+                </svg>
+              </span>
+              <span className="sainik-theme-icon sainik-theme-moon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -144,49 +238,125 @@ export default function MenuSection() {
           position: relative;
         }
 
-        .menu-tabs {
-          display: flex;
-          gap: 8px;
-          justify-content: center;
-          margin-bottom: 50px;
-          flex-wrap: wrap;
+        /* Sticky Category Pills Bar (Matching Image 1) */
+        .sainik-sticky-cat-bar {
+          position: sticky;
+          top: 70px;
+          z-index: 1000;
+          background: rgba(250, 245, 237, 0.95);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          border-bottom: 1px solid rgba(200, 105, 58, 0.15);
+          padding: 12px 0 14px;
+          margin-bottom: 30px;
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
         }
-        .menu-tab-browse-btn {
-          padding: 8px 18px;
-          font-size: 0.85rem;
-          font-weight: 700;
-          border: 1.5px solid var(--secondary-color, #c8693a);
-          border-radius: 30px;
-          background: #181311;
-          color: #ffffff;
+        .sainik-cat-pills-scroll {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          overflow-x: auto;
+          padding: 4px 0;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          -webkit-overflow-scrolling: touch;
+        }
+        .sainik-cat-pills-scroll::-webkit-scrollbar {
+          display: none;
+        }
+
+        /* "All" Pill */
+        .sainik-cat-pill-all {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 9px 22px;
+          border-radius: 40px;
+          background: #c8693a;
+          color: #ffffff !important;
+          border: none;
           cursor: pointer;
-          transition: all 0.3s;
+          flex-shrink: 0;
+          box-shadow: 0 4px 14px rgba(200, 105, 58, 0.35);
+          transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .sainik-cat-pill-all:hover {
+          background: #b0562b;
+          transform: translateY(-1px);
+          box-shadow: 0 6px 18px rgba(200, 105, 58, 0.45);
+        }
+        .sainik-pill-all-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .sainik-pill-all-text {
+          font-family: var(--font-heading, "Cormorant", serif);
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: 0.3px;
+        }
+
+        /* Category Item Pill */
+        .sainik-cat-pill-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 16px 8px 14px;
+          border-radius: 40px;
+          background: #fbf6ee;
+          color: #2a2423 !important;
+          border: 1px solid rgba(200, 105, 58, 0.22);
+          cursor: pointer;
+          flex-shrink: 0;
+          box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04);
+          transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+          white-space: nowrap;
+        }
+        .sainik-cat-pill-item:hover {
+          background: #ffffff;
+          border-color: #c8693a;
+          transform: translateY(-1px);
           box-shadow: 0 4px 12px rgba(200, 105, 58, 0.2);
         }
-        .menu-tab-browse-btn:hover {
-          background: var(--secondary-color, #c8693a);
+        .sainik-cat-pill-item.active {
+          background: #c8693a !important;
+          color: #ffffff !important;
+          border-color: #c8693a !important;
+          box-shadow: 0 6px 18px rgba(200, 105, 58, 0.4);
           transform: translateY(-1px);
         }
-        .menu-tab {
-          padding: 8px 18px;
-          font-size: 0.8rem;
-          letter-spacing: 0.5px;
-          font-weight: 600;
-          border: 1px solid var(--seventh-color);
-          border-radius: 30px;
-          background: transparent;
-          color: var(--fifth-color);
-          cursor: pointer;
-          transition: all 0.3s;
+        .sainik-cat-pill-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #2a2423;
+          stroke: #2a2423;
         }
-        .menu-tab:hover {
-          border-color: var(--secondary-color);
-          color: var(--secondary-color);
+        .sainik-cat-pill-item.active .sainik-cat-pill-icon {
+          color: #ffffff !important;
+          stroke: #ffffff !important;
         }
-        .menu-tab.active {
-          background: var(--secondary-color);
-          border-color: var(--secondary-color);
-          color: #fff;
+        .sainik-cat-pill-name {
+          font-family: var(--font-heading, "Cormorant", serif);
+          font-size: 1.1rem;
+          font-weight: 700;
+          letter-spacing: 0.2px;
+        }
+        .sainik-cat-pill-item .cat-pill-count {
+          background: #f5dfd3;
+          color: #9e4b24;
+          font-size: 0.82rem;
+          font-weight: 700;
+          padding: 2px 7px;
+          border-radius: 12px;
+          margin-left: 2px;
+          line-height: 1.1;
+        }
+        .sainik-cat-pill-item.active .cat-pill-count {
+          background: rgba(255, 255, 255, 0.28) !important;
+          color: #ffffff !important;
         }
 
         .menu-section-header {
@@ -383,51 +553,144 @@ export default function MenuSection() {
           box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
         }
 
-        /* Floating Menu Button */
-        .sainik-react-menu-floating-btn {
+        /* Unified Floating Cart & WhatsApp Bar (Matching Image 2) */
+        .sainik-floating-bar {
           position: fixed;
-          bottom: 24px;
+          bottom: 20px;
           left: 50%;
           transform: translateX(-50%);
-          z-index: 1030;
-          cursor: pointer;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .sainik-menu-pill {
-          background: #15100e;
-          backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          border: 1.5px solid var(--secondary-color, #c8693a);
-          border-radius: 35px;
-          padding: 9px 20px 9px 18px;
+          z-index: 1040;
           display: flex;
           align-items: center;
-          gap: 9px;
-          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+          white-space: nowrap !important;
+          transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+          max-width: 95vw;
+        }
+        .sainik-float-pill {
+          background: #181311;
+          border-radius: 50px;
+          padding: 5px 8px 5px 18px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.3s ease;
+        }
+        .sainik-floating-bar:hover .sainik-float-pill {
+          box-shadow: 0 16px 42px rgba(0, 0, 0, 0.65), 0 0 20px rgba(200, 105, 58, 0.25);
+          transform: translateY(-2px);
+        }
+        .sainik-float-info {
+          display: flex;
+          align-items: center;
+          gap: 8px;
           color: #ffffff;
+          font-family: var(--font-heading, "Cormorant", serif);
+          cursor: pointer;
+        }
+        .sainik-float-cart-icon {
+          stroke: #ffffff;
+          flex-shrink: 0;
+        }
+        .sainik-float-count-badge {
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: 0.3px;
+        }
+        .sainik-float-sep {
+          width: 1px;
+          height: 22px;
+          background: rgba(255, 255, 255, 0.16);
+          flex-shrink: 0;
+          margin: 0 2px;
+        }
+        .sainik-float-cta {
+          background: #c8693a;
+          color: #ffffff;
+          border: none;
+          padding: 9px 20px;
+          border-radius: 40px;
+          font-family: var(--font-heading, "Cormorant", serif);
+          font-size: 1.08rem;
+          font-weight: 700;
+          letter-spacing: 0.3px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          box-shadow: 0 3px 12px rgba(200, 105, 58, 0.4);
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+        .sainik-float-cta:hover {
+          background: #b0562b;
+          box-shadow: 0 5px 16px rgba(200, 105, 58, 0.55);
+        }
+        .sainik-float-wa-icon {
+          fill: #ffffff;
+          flex-shrink: 0;
+        }
+        .sainik-float-arrow {
+          font-size: 1.15rem;
+          line-height: 1;
+        }
+        .sainik-float-theme-toggle {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          flex-shrink: 0;
+        }
+        .sainik-theme-pill-track {
+          background: #27201d;
+          border-radius: 30px;
+          padding: 3px 5px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .sainik-theme-icon {
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: rgba(255, 255, 255, 0.5);
+          stroke: rgba(255, 255, 255, 0.5);
           transition: all 0.25s ease;
         }
-        .sainik-react-menu-floating-btn:hover .sainik-menu-pill {
-          transform: scale(1.05);
-          box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55), 0 0 20px rgba(200, 105, 58, 0.4);
-        }
-        .sainik-menu-icon {
-          font-size: 1.1rem;
-        }
-        .sainik-menu-pill-text {
-          font-family: var(--font-heading, serif);
-          font-size: 1.05rem;
-          font-weight: 700;
-          letter-spacing: 1.2px;
-          text-transform: uppercase;
-        }
-        .sainik-menu-pill-count {
-          background: var(--secondary-color, #c8693a);
+        .sainik-theme-icon.active {
+          background: rgba(255, 255, 255, 0.16);
           color: #ffffff;
-          font-size: 0.75rem;
-          font-weight: 700;
-          padding: 2px 7px;
-          border-radius: 12px;
+          stroke: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+          .sainik-floating-bar {
+            bottom: 14px;
+            max-width: calc(100vw - 20px);
+          }
+          .sainik-float-pill {
+            padding: 5px 6px 5px 12px;
+            gap: 8px;
+          }
+          .sainik-float-count-badge {
+            font-size: 1.02rem;
+          }
+          .sainik-float-cta {
+            padding: 8px 14px;
+            font-size: 0.96rem;
+            gap: 6px;
+          }
+          .sainik-theme-icon {
+            width: 24px;
+            height: 24px;
+          }
         }
 
         /* Overlay & Bottom Sheet */

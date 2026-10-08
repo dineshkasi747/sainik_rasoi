@@ -249,13 +249,96 @@ def render_category_section(cat):
   </div>
 </section>'''
 
-# Generate Sticky Category Pills Bar (Top of Menu)
+# SVG Icons for Category Pills
+SVG_ICONS = {
+    "all": '''<svg class="sainik-pill-all-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6"></line>
+      <line x1="8" y1="12" x2="21" y2="12"></line>
+      <line x1="8" y1="18" x2="21" y2="18"></line>
+      <circle cx="4" cy="6" r="1.5" fill="currentColor"></circle>
+      <circle cx="4" cy="12" r="1.5" fill="currentColor"></circle>
+      <circle cx="4" cy="18" r="1.5" fill="currentColor"></circle>
+    </svg>''',
+    "starters": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 11h16a1 1 0 0 1 1 1 7 7 0 0 1-14 0 1 1 0 0 1 1-1z"></path>
+      <path d="M7 8V4"></path>
+      <path d="M12 7V3"></path>
+      <path d="M17 8V4"></path>
+    </svg>''',
+    "snacks": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3l9 16H3L12 3z"></path>
+      <path d="M9 14h.01"></path>
+      <path d="M15 15h.01"></path>
+      <path d="M12 11h.01"></path>
+    </svg>''',
+    "paneer": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 10h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10z"></path>
+      <path d="M7 10V6a5 5 0 0 1 10 0v4"></path>
+      <circle cx="12" cy="16" r="1.5" fill="currentColor"></circle>
+    </svg>''',
+    "main-course": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12h18"></path>
+      <path d="M5 12v5a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4v-5"></path>
+      <path d="M8 8a4 4 0 0 1 8 0"></path>
+      <path d="M12 4v4"></path>
+    </svg>''',
+    "rice": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 12a9 9 0 0 0 18 0H3z"></path>
+      <path d="M7 9c.5-1 1-2 2-2s1.5 1 2 2"></path>
+      <path d="M13 9c.5-1 1-2 2-2s1.5 1 2 2"></path>
+      <line x1="8" y1="21" x2="16" y2="21"></line>
+    </svg>''',
+    "thali": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"></circle>
+      <circle cx="8.5" cy="9.5" r="2.2"></circle>
+      <circle cx="15.5" cy="9.5" r="2.2"></circle>
+      <circle cx="12" cy="15.5" r="2.2"></circle>
+    </svg>''',
+    "parathas": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="8"></circle>
+      <path d="M12 4a8 8 0 0 1 6 13.5"></path>
+      <path d="M8 8a5 5 0 0 1 8 0"></path>
+    </svg>''',
+    "breads": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 10c0-3.5 3-6 7-6s7 2.5 7 6v6a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3v-6z"></path>
+      <line x1="9" y1="10" x2="9" y2="15"></line>
+      <line x1="15" y1="10" x2="15" y2="15"></line>
+    </svg>''',
+    "chinese-fast-food": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 12h16c0 4.5-3.5 8-8 8s-8-3.5-8-8z"></path>
+      <line x1="17" y1="3" x2="9" y2="12"></line>
+      <line x1="20" y1="4" x2="12" y2="12"></line>
+    </svg>''',
+    "soups": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 11h16a8 8 0 0 1-16 0z"></path>
+      <path d="M6 7V4"></path>
+      <path d="M10 6V3"></path>
+      <path d="M14 7V4"></path>
+    </svg>''',
+    "raita-sides": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="13" r="8"></circle>
+      <path d="M12 5c-1 2-2 3-4 3 2 1 3 2 4 4 1-2 2-3 4-3-2-1-3-2-4-4z"></path>
+    </svg>''',
+    "beverages": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3h12l-2 16a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2L6 3z"></path>
+      <line x1="6" y1="8" x2="18" y2="8"></line>
+      <line x1="10" y1="3" x2="14" y2="1"></line>
+    </svg>''',
+    "desserts": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 10a6 6 0 0 1 12 0v2H6v-2z"></path>
+      <path d="M9 12v6a3 3 0 0 0 6 0v-6"></path>
+      <line x1="8" y1="21" x2="16" y2="21"></line>
+      <circle cx="12" cy="4" r="1.5" fill="currentColor"></circle>
+    </svg>'''
+}
+
+# Generate Sticky Category Pills Bar (Top of Menu - Matching Image 1)
 pills_html = [
     '<div class="sainik-sticky-cat-bar">',
     '  <div class="sainik-cat-pills-scroll">',
-    '    <button type="button" class="sainik-cat-pill-browse-all" onclick="window.sainikMenuNav.open()" title="Browse all categories">',
-    '      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:2px;"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>',
-    '      All',
+    '    <button type="button" class="sainik-cat-pill-all active" onclick="window.sainikMenuNav.toggle()" title="Browse all categories">',
+    f'      <span class="sainik-pill-all-icon">{SVG_ICONS["all"]}</span>',
+    '      <span class="sainik-pill-all-text">All</span>',
     '    </button>'
 ]
 
@@ -263,9 +346,10 @@ for cat in CATEGORIES:
     cat_id = cat['id']
     title = cat['title']
     count = len(cat['items'])
-    active_cls = ' active' if cat_id == 'starters' else ''
-    pills_html.append(f'''    <a href="#{cat_id}" class="sainik-cat-pill-item{active_cls}" data-cat-id="{cat_id}" onclick="event.preventDefault(); window.sainikMenuNav.scrollToCategory('{cat_id}')">
-      <span>{title}</span>
+    icon_svg = SVG_ICONS.get(cat_id, SVG_ICONS['starters'])
+    pills_html.append(f'''    <a href="#{cat_id}" class="sainik-cat-pill-item" data-cat-id="{cat_id}" onclick="event.preventDefault(); window.sainikMenuNav.scrollToCategory('{cat_id}')">
+      <span class="sainik-cat-pill-icon">{icon_svg}</span>
+      <span class="sainik-cat-pill-name">{title}</span>
       <span class="cat-pill-count">{count}</span>
     </a>''')
 
@@ -370,19 +454,8 @@ css_link = '<link rel="stylesheet" href="/assets/css/sainik-cart.css" />\n</head
 if '</head>' in final_html and '/assets/css/sainik-cart.css' not in final_html:
     final_html = final_html.replace('</head>', css_link, 1)
 
-# Add Cart Drawer HTML, Floating Menu Button & Category Bottom Sheet Modal
+# Add Cart Drawer HTML, Category Popover & Unified Floating Bar with Theme Switcher (Matching Image 2)
 cart_system_code = '''
-<!-- FLOATING MENU CATEGORY LAUNCHER BUTTON -->
-<div id="sainik-floating-menu-btn" class="sainik-floating-menu-btn" onclick="window.sainikMenuNav.toggle()" role="button" aria-label="Browse Menu Categories">
-  <div class="sainik-menu-pill">
-    <svg class="sainik-menu-icon" width="18" height="18" viewBox="0 0 24 24">
-      <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
-    </svg>
-    <span class="sainik-menu-pill-text">MENU</span>
-    <span class="sainik-menu-pill-count">13</span>
-  </div>
-</div>
-
 <!-- CATEGORY SELECTOR POPUP CARD (MATCHING USER SCREENSHOT) -->
 <div id="sainik-cat-overlay" class="sainik-cat-overlay" onclick="window.sainikMenuNav.close()"></div>
 <div id="sainik-cat-sheet" class="sainik-cat-sheet" role="dialog" aria-modal="true" aria-label="Select Menu Category">
@@ -391,17 +464,53 @@ cart_system_code = '''
   </div>
 </div>
 
-<!-- SAINIK RASOI LUXURY THEME-HARMONIOUS WHATSAPP CART SYSTEM -->
+<!-- UNIFIED FLOATING CART & WHATSAPP ORDER BAR WITH THEME SWITCH (MATCHING SCREENSHOT) -->
 <div id="sainik-floating-cart-bar" class="sainik-floating-bar" onclick="window.sainikCart.open()" role="button" aria-label="View Order Selection">
   <div class="sainik-float-pill">
-    <div class="sainik-float-info">
-      <span class="sainik-float-icon">🛒</span>
+    <!-- Left Section: Cart Icon + Items Count -->
+    <div class="sainik-float-info" onclick="event.stopPropagation(); window.sainikCart.open()">
+      <svg class="sainik-float-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
       <span class="sainik-float-count-badge" id="sainik-float-count">1 Item</span>
     </div>
+
+    <!-- Divider Line -->
     <div class="sainik-float-sep"></div>
-    <div class="sainik-float-cta">
+
+    <!-- Middle Section: Terracotta WhatsApp Order CTA -->
+    <button type="button" class="sainik-float-cta" onclick="event.stopPropagation(); window.sainikCart.open()" aria-label="Order on WhatsApp">
+      <svg class="sainik-float-wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.892.812 2.796.812 3.179 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.07-1.107-.063-.267-.086-.599-.214-1.028-.399-1.815-.783-3.003-2.617-3.094-2.739-.091-.122-.741-.986-.741-1.881 0-.895.469-1.334.636-1.517.167-.183.365-.228.487-.228.122 0 .243.002.349.007.113.005.263-.043.411.312.153.365.518 1.263.563 1.355.045.091.076.198.015.32-.061.122-.091.198-.183.305-.091.107-.193.239-.275.32-.092.091-.188.19-.081.373.107.183.475.783 1.019 1.268.701.625 1.291.819 1.474.91.183.091.29.076.396-.046.107-.122.457-.533.579-.716.122-.183.244-.152.411-.091.167.061 1.065.502 1.248.594.183.091.305.137.35.213.046.076.046.442-.098.847zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.662 1.442 5.177L2 22l4.981-1.307A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.154c-1.636 0-3.151-.487-4.423-1.326l-.317-.208-2.955.775.789-2.88-.228-.363A8.118 8.118 0 013.846 12c0-4.496 3.658-8.154 8.154-8.154s8.154 3.658 8.154 8.154-3.658 8.154-8.154 8.154z"/>
+      </svg>
       <span>Order on WhatsApp</span>
       <span class="sainik-float-arrow">→</span>
+    </button>
+
+    <!-- Right Section: Theme Switcher Pill -->
+    <div class="sainik-float-theme-toggle" id="sainik-theme-toggle" onclick="event.stopPropagation(); window.sainikCart.toggleTheme()" role="button" aria-label="Toggle Dark / Light Theme" title="Toggle Dark/Light Mode">
+      <div class="sainik-theme-pill-track">
+        <span class="sainik-theme-icon sainik-theme-sun active" title="Light Mode">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="4"></line>
+            <line x1="12" y1="20" x2="12" y2="22"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="2" y1="12" x2="4" y2="12"></line>
+            <line x1="20" y1="12" x2="22" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </span>
+        <span class="sainik-theme-icon sainik-theme-moon" title="Dark Mode">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </div>
     </div>
   </div>
 </div>
