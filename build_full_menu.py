@@ -4,7 +4,7 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Load the clean original template from HEAD~1
+# Load the clean original template from HEAD~1 or current file
 try:
     orig_html = subprocess.check_output(['git', 'show', 'HEAD~1:public/menu-02/index.html'], text=True, encoding='utf-8')
 except Exception:
@@ -16,8 +16,17 @@ CATEGORIES = [
         "id": "starters",
         "title": "Starters",
         "subtitle": "🌶️ Sizzling Tandoori & Crispy Starters",
+        "icon": "🌶️",
         "items": [
             {"name": "Paneer Tikka", "desc": "Clay-oven roasted cottage cheese skewers marinated in spiced hung yogurt & aromatic herbs.", "img": "/assets/food/paneer_tikka.jpg"},
+            {"name": "Mushroom Tikka", "desc": "Plump button mushrooms marinated in spiced tandoori yogurt and charred to perfection in clay oven.", "img": "/assets/food/mushroom_tikka.jpg"},
+            {"name": "Malai Chaap", "desc": "Succulent soya chaap grilled and tossed in rich cashew-cream marinade with delicate spices.", "img": "/assets/food/malai_chaap.jpg"},
+            {"name": "Malai Tikka", "desc": "Melt-in-mouth cottage cheese cubes coated in rich cashew-cream glaze, cardamom and roasted.", "img": "/assets/food/malai_tikka.jpg"},
+            {"name": "Muska Chaap", "desc": "Tender soya chaap roasted in tandoor and tossed generously with sizzling butter & chaat masala.", "img": "/assets/food/muska_chaap.jpg"},
+            {"name": "Hara Bhara Kabab", "desc": "Crispy golden patties of spinach, green peas, paneer and herbs topped with fried cashew nut.", "img": "/assets/food/hara_bhara_kabab.jpg"},
+            {"name": "Dahi Ke Sole", "desc": "Crispy golden bread rolls filled with velvety spiced hung curd, bell peppers and mild herbs.", "img": "/assets/food/dahi_ke_sole.jpg"},
+            {"name": "Dahi Kabab", "desc": "Delicate melt-in-mouth golden patties made of creamy hung yogurt, cottage cheese and cumin.", "img": "/assets/food/dahi_kabab.jpg"},
+            {"name": "Tito Chakhna", "desc": "Crunchy rasoi party mix of masala peanuts, crispy sev, corn, diced onions, chilies & tangy spices.", "img": "/assets/food/tito_chakhna.jpg"},
             {"name": "Paneer 65", "desc": "Crispy and tangy South Indian style batter-fried paneer chunks tempered with curry leaves.", "img": "/assets/food/paneer_65.jpg"},
             {"name": "Chilly Paneer", "desc": "Cottage cheese cubes wok-tossed in spicy Indo-Chinese chili sauce with bell peppers & scallions.", "img": "/assets/food/chilly_paneer.jpg"},
             {"name": "Veg Manchurian Dry", "desc": "Crispy minced vegetable dumplings wok-tossed in garlic, ginger, and savory soy sauce.", "img": "/assets/food/veg_manchurian_dry.jpg"},
@@ -28,6 +37,7 @@ CATEGORIES = [
             {"name": "Sweet Corn Chaat", "desc": "Tender steamed golden corn tossed with butter, chaat spices, and fresh coriander.", "img": "/assets/food/sweet_corn_chaat.jpg"},
             {"name": "Peanut Masala", "desc": "Crunchy roasted peanuts mixed with diced onions, juicy tomatoes, green chilies & chaat masala.", "img": "/assets/food/peanut_masala.jpg"},
             {"name": "Black Chana Chaat", "desc": "Protein-rich boiled black chickpeas seasoned with lemon juice, onions, tomatoes, and herbs.", "img": "/assets/food/black_chana_chaat.jpg"},
+            {"name": "Roasted Papad", "desc": "Crispy fire-roasted spiced lentil wafers served crisp with fresh mint dip & onion salad.", "img": "/assets/food/roasted_papad.jpg"},
             {"name": "Papad", "desc": "Crispy spiced lentil wafers, roasted or fried to golden crispness.", "img": "/assets/food/papad_roasted_fried.jpg"},
         ]
     },
@@ -35,6 +45,7 @@ CATEGORIES = [
         "id": "snacks",
         "title": "Snacks",
         "subtitle": "🥟 Classic Street Delights & Evening Treats",
+        "icon": "🥟",
         "items": [
             {"name": "Samosa", "desc": "Golden flaky pastry shells stuffed with spiced potato mash, green peas, and fragrant herbs.", "img": "/assets/food/samosa_2_pcs.jpg"},
             {"name": "Samosa Chaat", "desc": "Crushed golden samosas layered with spiced chole, sweet tamarind chutney, mint dip & sev.", "img": "/assets/food/samosa_chaat.jpg"},
@@ -45,6 +56,7 @@ CATEGORIES = [
         "id": "paneer",
         "title": "Paneer",
         "subtitle": "🧀 Signature Royal Cottage Cheese Curries",
+        "icon": "🧀",
         "items": [
             {"name": "Paneer Butter Masala", "desc": "Signature rich and creamy tomato-butter curry loaded with soft cottage cheese chunks.", "img": "/assets/food/paneer_butter_masala.jpg"},
             {"name": "Kadhai Paneer", "desc": "Paneer tossed with crunchy bell peppers and onions in freshly ground aromatic kadhai spices.", "img": "/assets/food/kadhai_paneer.jpg"},
@@ -59,6 +71,7 @@ CATEGORIES = [
         "id": "main-course",
         "title": "Main Course",
         "subtitle": "🍛 Traditional Desi Gravies & Dal Specialties",
+        "icon": "🍛",
         "items": [
             {"name": "Dal Makhani", "desc": "Slow-cooked black lentils simmered overnight with butter, dairy cream, and aromatic spices.", "img": "/assets/food/dal_makhani.jpg"},
             {"name": "Dal Tadka", "desc": "Yellow lentils tempered with ghee, cumin seeds, garlic, ginger, and spicy red chilies.", "img": "/assets/food/dal_tadka.jpg"},
@@ -70,11 +83,25 @@ CATEGORIES = [
         ]
     },
     {
+        "id": "rice",
+        "title": "Rice & Biryani",
+        "subtitle": "🍚 Aromatic Dum Biryani, Fragrant Pulao & Basmati Rice",
+        "icon": "🍚",
+        "is_new": True,
+        "items": [
+            {"name": "Veg Biryani", "desc": "Fragrant aged basmati rice slow-cooked with fresh garden vegetables, saffron, mint and royal aromatic biryani spices.", "img": "/assets/food/veg_biryani.jpg"},
+            {"name": "Veg Pulao", "desc": "Mildly spiced basmati rice sautéed with green peas, diced carrots, beans, whole spices and desi ghee.", "img": "/assets/food/veg_pulao.jpg"},
+            {"name": "Jeera Rice", "desc": "Fluffy steamed basmati rice tempered with roasted cumin seeds and fresh coriander in pure ghee.", "img": "/assets/food/jeera_rice.jpg"},
+            {"name": "Plain Rice", "desc": "Perfectlys steamed long-grain basmati rice, light and fluffy, ideal accompaniment for dals and curries.", "img": "/assets/food/plain_rice.jpg"},
+        ]
+    },
+    {
         "id": "thali",
         "title": "Special Thali",
         "subtitle": "🍱 Complete Royal Feasts with Curries, Breads & Desserts",
+        "icon": "🍱",
         "items": [
-            {"name": "Normal Thali", "desc": "Wholesome meal with Dal Tadka, Seasonal Mix Veg, 4 Tawa Phulkas, Steamed Rice, Salad & Pickle.", "img": "/assets/food/normal_thali.jpg"},
+            {"name": "Normal Thali", "desc": "Wholesome meal with Dal Tadka, Seasonal Mix Veg, 5 Butter Phulkas, Steamed Rice, Salad & Pickle.", "img": "/assets/food/normal_thali.jpg"},
             {"name": "Paneer Thali", "desc": "Royal vegetarian feast with Paneer Butter Masala, Dal Makhani, 4 Butter Phulkas, Rice, Gulab Jamun & Salad.", "img": "/assets/food/paneer_thali.jpg"},
         ]
     },
@@ -82,17 +109,19 @@ CATEGORIES = [
         "id": "parathas",
         "title": "Parathas",
         "subtitle": "🫓 Stuffed Tawa Parathas with Amul Butter & Curd",
+        "icon": "🫓",
         "items": [
-            {"name": "Paneer Paratha", "desc": "Whole wheat flatbread generously stuffed with spiced grated paneer, served with Amul butter.", "img": "/assets/food/paneer_paratha.jpg"},
-            {"name": "Gobhi Paratha", "desc": "Flaky paratha loaded with freshly grated spiced cauliflower, ginger, and green chilies.", "img": "/assets/food/gobhi_paratha.jpg"},
-            {"name": "Onion Paratha", "desc": "Crispy griddled paratha filled with seasoned crunchy onions, coriander, and carom seeds.", "img": "/assets/food/onion_paratha.jpg"},
-            {"name": "Cheese Sweet Corn Paratha", "desc": "Gooey melted cheese and sweet golden corn kernels stuffed inside flaky golden paratha.", "img": "/assets/food/cheese_sweet_corn_paratha.jpg"},
+            {"name": "Paneer Paratha", "desc": "Whole wheat flatbread generously stuffed with spiced grated paneer, served with rich Amul butter.", "img": "/assets/food/paneer_paratha.jpg"},
+            {"name": "Gobhi Paratha", "desc": "Flaky paratha loaded with freshly grated spiced cauliflower, ginger, and green chilies, served with rich Amul butter.", "img": "/assets/food/gobhi_paratha.jpg"},
+            {"name": "Onion Paratha", "desc": "Crispy griddled paratha filled with seasoned crunchy onions, coriander, and carom seeds, served with rich Amul butter.", "img": "/assets/food/onion_paratha.jpg"},
+            {"name": "Cheese Sweet Corn Paratha", "desc": "Gooey melted cheese and sweet golden corn kernels stuffed inside flaky golden paratha, served with rich Amul butter.", "img": "/assets/food/cheese_sweet_corn_paratha.jpg"},
         ]
     },
     {
         "id": "breads",
         "title": "Breads",
         "subtitle": "🍞 Hot Tandoori Rotis, Naans & Tawa Phulkas",
+        "icon": "🍞",
         "items": [
             {"name": "Tawa Phulka", "desc": "Soft, puffed whole wheat flatbread made fresh on iron tawa.", "img": "/assets/food/tawa_phulka.jpg"},
             {"name": "Butter Tawa Phulka", "desc": "Hot puffed whole wheat phulka brushed generously with melting Amul butter.", "img": "/assets/food/butter_tawa_phulka.jpg"},
@@ -105,6 +134,7 @@ CATEGORIES = [
         "id": "chinese-fast-food",
         "title": "Chinese & Fast Food",
         "subtitle": "🥢 Indo-Chinese Wok Specialties, Momos & Sandwiches",
+        "icon": "🥢",
         "items": [
             {"name": "Veg Noodles", "desc": "Wok-tossed noodles with shredded cabbage, carrots, bell peppers in savory soy-garlic sauce.", "img": "/assets/food/veg_noodles.jpg"},
             {"name": "Veg Manchurian", "desc": "Vegetable dumplings simmered in savory, tangy ginger-garlic Chinese gravy.", "img": "/assets/food/veg_manchurian.jpg"},
@@ -120,6 +150,7 @@ CATEGORIES = [
         "id": "soups",
         "title": "Soups",
         "subtitle": "🥣 Warm & Comforting Chef Special Soups",
+        "icon": "🥣",
         "items": [
             {"name": "Sweet Corn Soup", "desc": "Velvety broth loaded with sweet golden corn kernels and tender minced vegetables.", "img": "/assets/food/sweet_corn_soup.jpg"},
             {"name": "Tomato Soup", "desc": "Classic ripe tomato soup with butter, aromatic spices, and crispy golden croutons.", "img": "/assets/food/tomato_soup.jpg"},
@@ -130,6 +161,7 @@ CATEGORIES = [
         "id": "raita-sides",
         "title": "Raita & Sides",
         "subtitle": "🥗 Refreshing Curd Accompaniments & Salads",
+        "icon": "🥗",
         "items": [
             {"name": "Veg Raita", "desc": "Chilled whipped yogurt mixed with diced cucumber, tomatoes, onions, roasted cumin & mint.", "img": "/assets/food/veg_raita.jpg"},
             {"name": "Boondi Raita", "desc": "Crispy spiced gram flour droplets soaked in seasoned, creamy chilled curd.", "img": "/assets/food/boondi_raita.jpg"},
@@ -141,6 +173,7 @@ CATEGORIES = [
         "id": "beverages",
         "title": "Beverages",
         "subtitle": "🥤 Chilled Refreshments, Punjabi Lassi & Cold Drinks",
+        "icon": "🥤",
         "items": [
             {"name": "Lassi (Sweet / Salty)", "desc": "Traditional thick and creamy hand-churned Punjabi yogurt drink, served chilled.", "img": "/assets/food/lassi_sweet_salty.jpg"},
             {"name": "Cold Drinks", "desc": "Chilled aerated soft drinks to complement your spicy rasoi meal.", "img": "/assets/food/cold_drinks_small_big.jpg"},
@@ -151,6 +184,7 @@ CATEGORIES = [
         "id": "desserts",
         "title": "Desserts",
         "subtitle": "🍨 Authentic Mithai & Sweet Delicacies",
+        "icon": "🍨",
         "items": [
             {"name": "Ice Cream (2 Scoops)", "desc": "Two rich, creamy scoops of ice cream in choice of vanilla, rich chocolate, or strawberry.", "img": "/assets/food/ice_cream_2_scoops.jpg"},
             {"name": "Gulab Jamun", "desc": "Warm, melt-in-mouth milk solid dumplings dipped in fragrant rose and cardamom sugar syrup.", "img": "/assets/food/gulab_jamun_2_pcs.jpg"},
@@ -168,11 +202,11 @@ def render_menu_item(item):
     safe_img = escape_js(item['img'])
     return f'''<div class="menu-item" data-dish-name="{item['name']}">
   <div class="pxl-item-featured">
-    <img loading="lazy" decoding="async" width="68" height="68" src="{item['img']}" class="attachment-full" alt="{item['name']}" />
+    <img loading="lazy" decoding="async" width="70" height="70" src="{item['img']}" class="attachment-full" alt="{item['name']}" />
   </div>
   <div class="pxl-item--inner">
     <div class="wp-title">
-      <h4 class="pxl--title">{item['name']}</h4>
+      <h4 class="pxl--title" title="{item['name']}">{item['name']}</h4>
       <span class="line-dotted"></span>
       <button type="button" class="pxl--price sainik-theme-add-btn" onclick="window.sainikCart.add('{safe_name}', '{safe_img}')" title="Add {item['name']} to your selection">
         + Add
@@ -185,7 +219,7 @@ def render_menu_item(item):
 def render_category_section(cat):
     items_html = "\n".join(render_menu_item(it) for it in cat['items'])
     
-    return f'''<section id="{cat['id']}" class="elementor-section elementor-top-section elementor-element elementor-section-boxed elementor-section-height-default elementor-section-height-default pxl-type-header-none pxl-row-scroll-none pxl-bg-color-none pxl-section-bg-none parallax-none" data-element_type="section" style="scroll-margin-top: 90px; padding-top: 40px; padding-bottom: 20px;">
+    return f'''<section id="{cat['id']}" class="elementor-section elementor-top-section elementor-element elementor-section-boxed elementor-section-height-default elementor-section-height-default pxl-type-header-none pxl-row-scroll-none pxl-bg-color-none pxl-section-bg-none parallax-none" data-element_type="section" style="scroll-margin-top: 135px; padding-top: 40px; padding-bottom: 20px;">
   <div class="elementor-container elementor-column-gap-default">
     <div class="elementor-column elementor-col-100 elementor-top-column elementor-element pxl-col-none pxl-column-none" data-element_type="column">
       <div class="elementor-widget-wrap elementor-element-populated">
@@ -218,8 +252,32 @@ def render_category_section(cat):
   </div>
 </section>'''
 
+# Generate Sticky Category Pills Bar (Top of Menu)
+pills_html = [
+    '<div class="sainik-sticky-cat-bar">',
+    '  <div class="sainik-cat-pills-scroll">',
+    '    <button type="button" class="sainik-cat-pill-browse-all" onclick="window.sainikMenuNav.open()" title="Browse all categories">',
+    '      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:2px;"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>',
+    '      All',
+    '    </button>'
+]
+
+for cat in CATEGORIES:
+    cat_id = cat['id']
+    title = cat['title']
+    count = len(cat['items'])
+    active_cls = ' active' if cat_id == 'starters' else ''
+    pills_html.append(f'''    <a href="#{cat_id}" class="sainik-cat-pill-item{active_cls}" data-cat-id="{cat_id}" onclick="event.preventDefault(); window.sainikMenuNav.scrollToCategory('{cat_id}')">
+      <span>{title}</span>
+      <span class="cat-pill-count">{count}</span>
+    </a>''')
+
+pills_html.append('  </div>')
+pills_html.append('</div>')
+sticky_cat_bar_html = "\n".join(pills_html)
+
 # Generate all category sections
-body_sections = []
+body_sections = [sticky_cat_bar_html]
 for cat in CATEGORIES:
     body_sections.append(render_category_section(cat))
 
@@ -312,11 +370,41 @@ if clean_marker in final_html:
 
 # Add stylesheet link into <head>
 css_link = '<link rel="stylesheet" href="/assets/css/sainik-cart.css" />\n</head>'
-if '</head>' in final_html:
+if '</head>' in final_html and '/assets/css/sainik-cart.css' not in final_html:
     final_html = final_html.replace('</head>', css_link, 1)
 
-# Add Cart Drawer HTML & script reference
+# Add Cart Drawer HTML, Floating Menu Button & Category Bottom Sheet Modal
 cart_system_code = '''
+<!-- FLOATING MENU CATEGORY LAUNCHER BUTTON -->
+<div id="sainik-floating-menu-btn" class="sainik-floating-menu-btn" onclick="window.sainikMenuNav.open()" role="button" aria-label="Browse Menu Categories">
+  <div class="sainik-menu-pill">
+    <svg class="sainik-menu-icon" width="18" height="18" viewBox="0 0 24 24">
+      <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
+    </svg>
+    <span class="sainik-menu-pill-text">MENU</span>
+    <span class="sainik-menu-pill-count">13</span>
+  </div>
+</div>
+
+<!-- CATEGORY SELECTOR MODAL / BOTTOM SHEET (MATCHING USER SCREENSHOT) -->
+<div id="sainik-cat-overlay" class="sainik-cat-overlay" onclick="window.sainikMenuNav.close()"></div>
+<div id="sainik-cat-sheet" class="sainik-cat-sheet" role="dialog" aria-modal="true" aria-label="Select Menu Category">
+  <div class="sainik-cat-drag-bar"></div>
+  <div class="sainik-cat-header">
+    <div class="sainik-cat-header-left">
+      <span class="sainik-cat-header-icon">🍽️</span>
+      <div>
+        <h3 class="sainik-cat-header-title">Browse Menu</h3>
+        <span class="sainik-cat-header-sub">13 categories · 75 dishes</span>
+      </div>
+    </div>
+    <button type="button" class="sainik-cat-close-btn" onclick="window.sainikMenuNav.close()" aria-label="Close menu selector">✕</button>
+  </div>
+  <div class="sainik-cat-list" id="sainik-cat-list-items">
+    <!-- Populated dynamically by SainikMenuNav -->
+  </div>
+</div>
+
 <!-- SAINIK RASOI LUXURY THEME-HARMONIOUS WHATSAPP CART SYSTEM -->
 <div id="sainik-floating-cart-bar" class="sainik-floating-bar" onclick="window.sainikCart.open()" role="button" aria-label="View Order Selection">
   <div class="sainik-float-pill">
@@ -443,4 +531,4 @@ with open('public/menu-02/index.html', 'w', encoding='utf-8') as f:
     f.write(final_html)
 
 total_dishes = sum(len(c['items']) for c in CATEGORIES)
-print(f"Successfully generated public/menu-02/index.html with external JS/CSS and 100% reliable + Add buttons! Total dishes: {total_dishes}")
+print(f"Successfully generated public/menu-02/index.html with Category Selector & WhatsApp Cart! Total dishes: {total_dishes}")

@@ -1,5 +1,6 @@
 /**
  * Sainik Rasoi - Luxury WhatsApp Cart & 7km Delivery Validation System
+ * + Swiggy/Zomato Style Category Selector & ScrollSpy Navigation
  */
 (function () {
   'use strict';
@@ -180,10 +181,10 @@
         if (banner) banner.className = 'sainik-status-banner error';
         if (icon) icon.innerText = '⚠️';
         if (text) {
-          text.innerHTML = '<strong>Currently deliveries are not available for your area.</strong><br/><span style="font-size:0.75rem;opacity:0.9;">Deliveries are available only within 7 km radius of Sainik Rasoi. You can switch to Takeaway / Dine-in above!</span>';
+          text.innerHTML = '<strong>Delivery Unavailable:</strong> Selected distance (~' + this.distanceKm.toFixed(1) + ' km) exceeds our <strong>7.0 km fresh-delivery zone</strong>.';
         }
         if (checkoutBtn) checkoutBtn.classList.add('disabled');
-        if (checkoutText) checkoutText.innerText = 'Delivery Unavailable (> 7 km)';
+        if (checkoutText) checkoutText.innerText = 'Delivery Not Available (> 7 km)';
       }
     }
 
@@ -260,12 +261,19 @@
     updateUI() {
       const total = this.getTotalCount();
 
-      // Update floating bar
+      // Update floating cart bar
       const floatBar = document.getElementById('sainik-floating-cart-bar');
       const floatCount = document.getElementById('sainik-float-count');
       if (floatBar && floatCount) {
         floatCount.innerText = total + (total === 1 ? ' Item' : ' Items');
         floatBar.style.display = total > 0 ? 'inline-flex' : 'none';
+      }
+
+      // Add helper class to body for dual button positioning
+      if (total > 0) {
+        document.body.classList.add('sainik-has-cart');
+      } else {
+        document.body.classList.remove('sainik-has-cart');
       }
 
       // Update native header counters
@@ -299,18 +307,12 @@
         const address = document.getElementById('sainik-order-address')?.value.trim() || '';
         const notes = document.getElementById('sainik-order-notes')?.value.trim() || '';
 
-        if (!address) {
-          alert('Please enter your delivery address.');
-          document.getElementById('sainik-order-address')?.focus();
-          return;
-        }
-
         let text = '*🛵 NEW HOME DELIVERY ORDER — SAINIK RASOI*\n';
         text += '================================\n';
         text += '*Customer Information:*\n';
         if (custName) text += '• Name: ' + custName + '\n';
-        text += '• Address: ' + address + '\n';
-        text += '• Delivery Distance: ~' + this.distanceKm.toFixed(1) + ' km (Within 7km zone ✓)\n';
+        if (address) text += '• Address: ' + address + '\n';
+        text += '• Distance: ~' + this.distanceKm.toFixed(1) + ' km (within 7 km zone)\n';
         text += '--------------------------------\n';
 
         text += '*Items Ordered:*\n';
@@ -382,6 +384,169 @@
     }
   }
 
+  // ==========================================================================
+  // SWIGGY/ZOMATO STYLE CATEGORY SELECTOR & BOTTOM SHEET NAVIGATION
+  // ==========================================================================
+  class SainikMenuNav {
+    constructor() {
+      this.categories = [
+        { id: "starters", name: "Starters & Appetizers", shortName: "Starters", count: 21, icon: "🌶️" },
+        { id: "snacks", name: "Snacks & Chaat", shortName: "Snacks", count: 3, icon: "🥟" },
+        { id: "paneer", name: "Paneer Delicacies", shortName: "Paneer", count: 7, icon: "🧀" },
+        { id: "main-course", name: "Main Course & Dals", shortName: "Main Course", count: 7, icon: "🍛" },
+        { id: "rice", name: "Rice & Biryani", shortName: "Rice & Biryani", count: 4, icon: "🍚", isNew: true },
+        { id: "thali", name: "Rasoi Special Thali", shortName: "Special Thali", count: 2, icon: "🍱" },
+        { id: "parathas", name: "Stuffed Parathas", shortName: "Parathas", count: 4, icon: "🫓" },
+        { id: "breads", name: "Breads & Phulkas", shortName: "Breads", count: 5, icon: "🍞" },
+        { id: "chinese-fast-food", name: "Chinese & Fast Food", shortName: "Chinese", count: 8, icon: "🥢" },
+        { id: "soups", name: "Soups", shortName: "Soups", count: 3, icon: "🥣" },
+        { id: "raita-sides", name: "Raita & Sides", shortName: "Raita & Sides", count: 4, icon: "🥗" },
+        { id: "beverages", name: "Fluids & Beverages", shortName: "Beverages", count: 3, icon: "🥤" },
+        { id: "desserts", name: "Desserts & Mithai", shortName: "Desserts", count: 4, icon: "🍨" }
+      ];
+      this.activeId = "starters";
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => this.init());
+      } else {
+        this.init();
+      }
+    }
+
+    init() {
+      this.renderSheetItems();
+      this.bindScrollSpy();
+    }
+
+    open() {
+      const overlay = document.getElementById('sainik-cat-overlay');
+      const sheet = document.getElementById('sainik-cat-sheet');
+      if (overlay) overlay.classList.add('open');
+      if (sheet) sheet.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      this.updateActiveRow();
+    }
+
+    close() {
+      const overlay = document.getElementById('sainik-cat-overlay');
+      const sheet = document.getElementById('sainik-cat-sheet');
+      if (overlay) overlay.classList.remove('open');
+      if (sheet) sheet.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    toggle() {
+      const sheet = document.getElementById('sainik-cat-sheet');
+      if (sheet && sheet.classList.contains('open')) {
+        this.close();
+      } else {
+        this.open();
+      }
+    }
+
+    scrollToCategory(catId) {
+      this.close();
+      this.activeId = catId;
+      this.updateActivePills();
+      this.updateActiveRow();
+
+      setTimeout(() => {
+        const target = document.getElementById(catId);
+        if (!target) {
+          console.warn('Target category not found:', catId);
+          return;
+        }
+
+        const headerOffset = 130;
+        const targetRect = target.getBoundingClientRect();
+        const absoluteTop = window.pageYOffset + targetRect.top;
+        const offsetPosition = Math.max(0, absoluteTop - headerOffset);
+
+        try {
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        } catch (e) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 60);
+    }
+
+    renderSheetItems() {
+      const container = document.getElementById('sainik-cat-list-items');
+      if (!container) return;
+
+      container.innerHTML = this.categories.map(cat => {
+        const newBadge = cat.isNew ? '<span class="sainik-cat-new-badge">NEW</span>' : '';
+        const isActive = this.activeId === cat.id ? ' active' : '';
+        return `
+          <div class="sainik-cat-row${isActive}" data-cat-id="${cat.id}" onclick="window.sainikMenuNav.scrollToCategory('${cat.id}')">
+            <div class="sainik-cat-row-left">
+              <span class="sainik-cat-row-icon">${cat.icon}</span>
+              <span class="sainik-cat-row-name">${cat.name}</span>
+              ${newBadge}
+            </div>
+            <span class="sainik-cat-row-count">${cat.count}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    updateActiveRow() {
+      document.querySelectorAll('.sainik-cat-row').forEach(row => {
+        const id = row.getAttribute('data-cat-id');
+        if (id === this.activeId) {
+          row.classList.add('active');
+        } else {
+          row.classList.remove('active');
+        }
+      });
+    }
+
+    updateActivePills() {
+      document.querySelectorAll('.sainik-cat-pill-item').forEach(pill => {
+        const id = pill.getAttribute('data-cat-id');
+        if (id === this.activeId) {
+          pill.classList.add('active');
+          try {
+            pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } catch(e) {}
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+    }
+
+    bindScrollSpy() {
+      const sections = this.categories.map(c => document.getElementById(c.id)).filter(Boolean);
+      if (!sections.length) return;
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const scrollPos = window.scrollY + 140;
+            let current = sections[0].id;
+            for (let i = 0; i < sections.length; i++) {
+              if (sections[i].offsetTop <= scrollPos) {
+                current = sections[i].id;
+              }
+            }
+            if (this.activeId !== current) {
+              this.activeId = current;
+              this.updateActivePills();
+              this.updateActiveRow();
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+    }
+  }
+
   // Expose globally
   window.sainikCart = new SainikCart();
+  window.sainikMenuNav = new SainikMenuNav();
 })();

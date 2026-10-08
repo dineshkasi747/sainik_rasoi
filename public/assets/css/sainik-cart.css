@@ -2,26 +2,47 @@
    SAINIK RASOI LUXURY THEME-HARMONIOUS CART & DELIVERY SYSTEM
    ========================================================================== */
 
+/* Section Scroll Margin for Smooth Header Offset */
+#starters, #snacks, #paneer, #main-course, #rice, #thali, #parathas, #breads, #chinese-fast-food, #soups, #raita-sides, #beverages, #desserts {
+  scroll-margin-top: 135px !important;
+}
+
 /* Menu Item Alignment & Circular Thumbnails */
 .pxl-grid.pxl-menu-list .menu-item {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
   gap: 16px !important;
-  margin-bottom: 22px !important;
+  margin-bottom: 24px !important;
+  padding: 10px 14px !important;
+  border-radius: 14px !important;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(42, 36, 35, 0.05) !important;
 }
+.dark-mode .pxl-grid.pxl-menu-list .menu-item {
+  background: rgba(42, 36, 35, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+.pxl-grid.pxl-menu-list .menu-item:hover {
+  background: rgba(200, 105, 58, 0.08) !important;
+  border-color: rgba(200, 105, 58, 0.2) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06) !important;
+}
+
 .pxl-grid.pxl-menu-list .menu-item .pxl-item-featured {
-  width: 68px !important;
-  height: 68px !important;
-  min-width: 68px !important;
-  max-width: 68px !important;
-  min-height: 68px !important;
-  max-height: 68px !important;
+  width: 70px !important;
+  height: 70px !important;
+  min-width: 70px !important;
+  max-width: 70px !important;
+  min-height: 70px !important;
+  max-height: 70px !important;
   border-radius: 50% !important;
   overflow: hidden !important;
   flex-shrink: 0 !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15) !important;
-  border: 2px solid rgba(200, 105, 58, 0.4) !important;
+  border: 2px solid rgba(200, 105, 58, 0.45) !important;
   background: #2a2423 !important;
   display: block !important;
   margin: 0 !important;
@@ -40,59 +61,75 @@
   transition: transform 0.35s ease !important;
 }
 .pxl-grid.pxl-menu-list .menu-item:hover .pxl-item-featured img {
-  transform: scale(1.08) !important;
+  transform: scale(1.1) !important;
 }
+
+/* Inner Holder */
+.pxl-grid.pxl-menu-list .menu-item .pxl-item--inner,
 .pxl-grid.pxl-menu-list .menu-item .pxl-item--holder {
-  flex: 1 !important;
+  flex: 1 1 auto !important;
   min-width: 0 !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
   text-align: left !important;
 }
+
+/* Head row: Title - Dotted Line - Add Button */
+.pxl-grid.pxl-menu-list .menu-item .wp-title,
 .pxl-grid.pxl-menu-list .menu-item .pxl-item--head {
   display: flex !important;
-  align-items: baseline !important;
+  flex-direction: row !important;
+  align-items: center !important;
   justify-content: space-between !important;
   width: 100% !important;
-  margin-bottom: 4px !important;
+  gap: 8px !important;
+  margin-bottom: 5px !important;
   position: relative !important;
 }
+.pxl-grid.pxl-menu-list .menu-item .pxl--title,
 .pxl-grid.pxl-menu-list .menu-item .pxl-item--title {
   margin: 0 !important;
   padding: 0 !important;
   font-family: var(--font-heading, "Cormorant", serif) !important;
-  font-size: 1.28rem !important;
+  font-size: 1.25rem !important;
   font-weight: 700 !important;
   color: var(--primary-color, #2a2423) !important;
-  letter-spacing: 0.3px !important;
+  letter-spacing: 0.2px !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
-  flex-shrink: 0 !important;
-  max-width: 65% !important;
+  flex-shrink: 1 !important;
 }
+.dark-mode .pxl-grid.pxl-menu-list .menu-item .pxl--title,
 .dark-mode .pxl-grid.pxl-menu-list .menu-item .pxl-item--title {
   color: #f4e6dc !important;
 }
+.pxl-grid.pxl-menu-list .menu-item .line-dotted,
 .pxl-grid.pxl-menu-list .menu-item .pxl-item--divider {
-  flex: 1 !important;
-  margin: 0 10px !important;
-  border-bottom: 1px dotted rgba(42, 36, 35, 0.25) !important;
+  flex: 1 1 auto !important;
+  min-width: 15px !important;
+  margin: 0 8px !important;
+  border-bottom: 1.5px dotted rgba(42, 36, 35, 0.35) !important;
   height: 1px !important;
-  align-self: center !important;
+  display: block !important;
 }
+.dark-mode .pxl-grid.pxl-menu-list .menu-item .line-dotted,
 .dark-mode .pxl-grid.pxl-menu-list .menu-item .pxl-item--divider {
-  border-bottom-color: rgba(244, 230, 220, 0.2) !important;
+  border-bottom-color: rgba(244, 230, 220, 0.3) !important;
 }
 .pxl-grid.pxl-menu-list .menu-item .pxl--excerpt {
   font-size: 0.88rem !important;
   line-height: 1.45 !important;
-  color: rgba(42, 36, 35, 0.72) !important;
+  color: rgba(42, 36, 35, 0.75) !important;
   margin: 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
 }
 .dark-mode .pxl-grid.pxl-menu-list .menu-item .pxl--excerpt {
-  color: rgba(244, 230, 220, 0.65) !important;
+  color: rgba(244, 230, 220, 0.7) !important;
 }
 
 /* + Add Button */
@@ -101,14 +138,14 @@
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  padding: 4px 14px !important;
+  padding: 5px 16px !important;
   background: var(--secondary-color, #c8693a) !important;
   color: #ffffff !important;
   border: none !important;
   border-radius: 20px !important;
   font-family: var(--font-heading, "Cormorant", serif) !important;
   font-size: 0.95rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   letter-spacing: 0.5px !important;
   cursor: pointer !important;
   transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
@@ -117,6 +154,7 @@
   margin: 0 !important;
   z-index: 2 !important;
   position: relative !important;
+  white-space: nowrap !important;
 }
 .sainik-theme-add-btn:hover {
   background: #b0562b !important;
@@ -125,6 +163,29 @@
 }
 .sainik-theme-add-btn:active {
   transform: translateY(0) scale(0.98) !important;
+}
+
+@media (max-width: 768px) {
+  .pxl-grid.pxl-menu-list .menu-item {
+    gap: 12px !important;
+    padding: 8px 8px !important;
+    margin-bottom: 18px !important;
+  }
+  .pxl-grid.pxl-menu-list .menu-item .pxl-item-featured {
+    width: 60px !important;
+    height: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+  }
+  .pxl-grid.pxl-menu-list .menu-item .pxl--title,
+  .pxl-grid.pxl-menu-list .menu-item .pxl-item--title {
+    font-size: 1.1rem !important;
+  }
+  .pxl-grid.pxl-menu-list .menu-item .pxl--excerpt {
+    font-size: 0.82rem !important;
+  }
 }
 
 /* Floating Bar */
@@ -807,3 +868,388 @@ body.sainik-cart-open .pxl-switch-button,
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* ==========================================================================
+   SAINIK RASOI - SWIGGY/ZOMATO STYLE CATEGORY SELECTOR & BOTTOM SHEET
+   ========================================================================== */
+
+/* Sticky Category Pills Bar (Top of Menu) */
+.sainik-sticky-cat-bar {
+  position: sticky;
+  top: 75px;
+  z-index: 900;
+  background: rgba(250, 243, 237, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(200, 105, 58, 0.15);
+  border-bottom: 1px solid rgba(200, 105, 58, 0.18);
+  padding: 10px 0;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+.dark-mode .sainik-sticky-cat-bar {
+  background: rgba(31, 25, 23, 0.96);
+  border-color: rgba(200, 105, 58, 0.25);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+.sainik-cat-pills-scroll {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 2px 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.sainik-cat-pills-scroll::-webkit-scrollbar {
+  display: none;
+}
+.sainik-cat-pill-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 25px;
+  background: #ffffff;
+  border: 1px solid rgba(42, 36, 35, 0.12);
+  color: var(--primary-color, #2a2423);
+  font-family: var(--font-heading, "Cormorant", serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.dark-mode .sainik-cat-pill-item {
+  background: #27201e;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #f4e6dc;
+}
+.sainik-cat-pill-item:hover,
+.sainik-cat-pill-item.active {
+  background: var(--secondary-color, #c8693a) !important;
+  color: #ffffff !important;
+  border-color: var(--secondary-color, #c8693a) !important;
+  box-shadow: 0 4px 12px rgba(200, 105, 58, 0.35);
+  transform: translateY(-1px);
+}
+.sainik-cat-pill-item .cat-pill-count {
+  font-size: 0.78rem;
+  opacity: 0.75;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+.sainik-cat-pill-item.active .cat-pill-count {
+  background: rgba(255, 255, 255, 0.25);
+  opacity: 1;
+}
+.sainik-cat-pill-browse-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 25px;
+  background: #181311;
+  color: #ffffff;
+  border: 1px solid var(--secondary-color, #c8693a);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Floating "MENU" Button (Bottom Center or Side) */
+.sainik-floating-menu-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1030;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.sainik-menu-pill {
+  background: #15100e;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--secondary-color, #c8693a);
+  border-radius: 35px;
+  padding: 9px 20px 9px 18px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45), 0 0 15px rgba(200, 105, 58, 0.25);
+  color: #ffffff;
+  transition: all 0.25s ease;
+}
+.sainik-floating-menu-btn:hover .sainik-menu-pill {
+  transform: scale(1.05);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55), 0 0 20px rgba(200, 105, 58, 0.4);
+  background: #1f1714;
+}
+.sainik-floating-menu-btn:active .sainik-menu-pill {
+  transform: scale(0.97);
+}
+.sainik-menu-icon {
+  fill: var(--secondary-color, #c8693a);
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+}
+.sainik-menu-pill-text {
+  font-family: var(--font-heading, "Cormorant", serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.sainik-menu-pill-count {
+  background: var(--secondary-color, #c8693a);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 12px;
+  line-height: 1.2;
+}
+
+/* Adjust layout when both Floating Cart and Floating Menu are active */
+body.sainik-has-cart .sainik-floating-menu-btn {
+  left: auto;
+  right: 20px;
+  transform: none;
+  bottom: 24px;
+}
+body.sainik-has-cart .sainik-floating-bar {
+  left: 20px;
+  transform: none;
+  bottom: 24px;
+}
+@media (max-width: 600px) {
+  body.sainik-has-cart .sainik-floating-menu-btn {
+    bottom: 84px;
+    left: auto;
+    right: 16px;
+    transform: none;
+  }
+  body.sainik-has-cart .sainik-floating-bar {
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    max-width: 380px;
+  }
+}
+
+/* Category Bottom Sheet / Modal Overlay */
+.sainik-cat-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 8, 7, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1050;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.sainik-cat-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Category Bottom Sheet Panel (Dark Theme Matching User Reference) */
+.sainik-cat-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(105%);
+  width: 100%;
+  max-width: 440px;
+  background: #110d0c;
+  border-radius: 24px 24px 0 0;
+  border: 1px solid rgba(200, 105, 58, 0.3);
+  border-bottom: none;
+  box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.65), 0 0 25px rgba(200, 105, 58, 0.15);
+  z-index: 1060;
+  display: flex;
+  flex-direction: column;
+  max-height: 82vh;
+  transition: transform 0.38s cubic-bezier(0.2, 0.9, 0.25, 1);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.sainik-cat-sheet.open {
+  transform: translateX(-50%) translateY(0);
+}
+
+@media (min-width: 601px) {
+  .sainik-cat-sheet {
+    bottom: 30px;
+    border-radius: 24px;
+    border-bottom: 1px solid rgba(200, 105, 58, 0.3);
+    max-height: 78vh;
+  }
+}
+
+/* Sheet Top Drag Bar */
+.sainik-cat-drag-bar {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 4px;
+  margin: 10px auto 4px;
+  flex-shrink: 0;
+}
+
+/* Sheet Header */
+.sainik-cat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 22px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+.sainik-cat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sainik-cat-header-icon {
+  font-size: 1.3rem;
+}
+.sainik-cat-header-title {
+  margin: 0;
+  font-family: var(--font-heading, "Cormorant", serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+.sainik-cat-header-sub {
+  font-size: 0.78rem;
+  color: #bfaea9;
+  margin-left: 6px;
+  font-weight: 400;
+}
+.sainik-cat-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sainik-cat-close-btn:hover {
+  background: var(--secondary-color, #c8693a);
+  border-color: var(--secondary-color, #c8693a);
+  transform: rotate(90deg);
+}
+
+/* Category List Body (Matching User's Swiggy/Zomato Screenshot) */
+.sainik-cat-list {
+  padding: 8px 10px 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.sainik-cat-list::-webkit-scrollbar {
+  width: 4px;
+}
+.sainik-cat-list::-webkit-scrollbar-thumb {
+  background: rgba(200, 105, 58, 0.3);
+  border-radius: 4px;
+}
+
+/* Category Item Row */
+.sainik-cat-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 18px;
+  margin-bottom: 2px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+}
+.sainik-cat-row:hover {
+  background: rgba(200, 105, 58, 0.12);
+  transform: translateX(3px);
+}
+.sainik-cat-row:active {
+  background: rgba(200, 105, 58, 0.22);
+}
+.sainik-cat-row.active {
+  background: rgba(200, 105, 58, 0.16);
+  border-left-color: var(--secondary-color, #c8693a);
+}
+
+.sainik-cat-row-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sainik-cat-row-icon {
+  font-size: 1.15rem;
+  width: 26px;
+  text-align: center;
+}
+.sainik-cat-row-name {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.04rem;
+  font-weight: 600;
+  color: #f5ebe6;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease;
+}
+.sainik-cat-row:hover .sainik-cat-row-name,
+.sainik-cat-row.active .sainik-cat-row-name {
+  color: #ffaa7d;
+}
+
+/* NEW Badge */
+.sainik-cat-new-badge {
+  background: #392b23;
+  color: #f7a278;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(247, 162, 120, 0.4);
+  text-transform: uppercase;
+  margin-left: 6px;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+/* Count Badge on Right */
+.sainik-cat-row-count {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.5px;
+  padding-left: 12px;
+}
+.sainik-cat-row.active .sainik-cat-row-count {
+  color: var(--secondary-color, #c8693a);
+}
+

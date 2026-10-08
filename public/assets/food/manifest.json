@@ -1,5 +1,18 @@
 {
   "dishes": {
+    "Veg Biryani": "/assets/food/veg_biryani.jpg",
+    "Veg Pulao": "/assets/food/veg_pulao.jpg",
+    "Jeera Rice": "/assets/food/jeera_rice.jpg",
+    "Plain Rice": "/assets/food/plain_rice.jpg",
+    "Mushroom Tikka": "/assets/food/mushroom_tikka.jpg",
+    "Malai Chaap": "/assets/food/malai_chaap.jpg",
+    "Malai Tikka": "/assets/food/malai_tikka.jpg",
+    "Muska Chaap": "/assets/food/muska_chaap.jpg",
+    "Roasted Papad": "/assets/food/roasted_papad.jpg",
+    "Tito Chakhna": "/assets/food/tito_chakhna.jpg",
+    "Hara Bhara Kabab": "/assets/food/hara_bhara_kabab.jpg",
+    "Dahi Ke Sole": "/assets/food/dahi_ke_sole.jpg",
+    "Dahi Kabab": "/assets/food/dahi_kabab.jpg",
     "Paneer Paratha": "/assets/food/paneer_paratha.jpg",
     "Gobhi Paratha": "/assets/food/gobhi_paratha.jpg",
     "Onion Paratha": "/assets/food/onion_paratha.jpg",
@@ -64,6 +77,7 @@
     "Brownie with Ice Cream": "/assets/food/brownie_with_ice_cream.jpg"
   },
   "categories": {
+    "cat_rice": "/assets/food/cat_rice.jpg",
     "cat_paneer": "/assets/food/cat_paneer.jpg",
     "cat_parathas": "/assets/food/cat_parathas.jpg",
     "cat_thali": "/assets/food/cat_thali.jpg",
