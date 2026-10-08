@@ -1048,6 +1048,15 @@ body.sainik-has-cart .sainik-floating-bar {
   }
 }
 
+/* Smooth Scrolling and Category Section Offset */
+html {
+  scroll-behavior: smooth;
+}
+section[id],
+.elementor-section[id] {
+  scroll-margin-top: 135px !important;
+}
+
 /* Category Popover Overlay (Subtle click-away backdrop) */
 .sainik-cat-overlay {
   position: fixed;

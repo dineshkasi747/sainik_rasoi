@@ -4,12 +4,9 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Load the clean original template from HEAD~1 or current file
-try:
-    orig_html = subprocess.check_output(['git', 'show', 'HEAD~1:public/menu-02/index.html'], text=True, encoding='utf-8')
-except Exception:
-    with open('public/menu-02/index.html', 'r', encoding='utf-8') as f:
-        orig_html = f.read()
+# Load the clean original template from base_template.html
+with open('public/menu-02/base_template.html', 'r', encoding='utf-8') as f:
+    orig_html = f.read()
 
 CATEGORIES = [
     {

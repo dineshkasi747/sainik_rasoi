@@ -390,19 +390,19 @@
   class SainikMenuNav {
     constructor() {
       this.categories = [
-        { id: "starters", name: "Starters & Appetizers", shortName: "Starters", count: 21, icon: "🌶️" },
-        { id: "snacks", name: "Snacks & Chaat", shortName: "Snacks", count: 3, icon: "🥟" },
-        { id: "paneer", name: "Paneer Delicacies", shortName: "Paneer", count: 7, icon: "🧀" },
-        { id: "main-course", name: "Main Course & Dals", shortName: "Main Course", count: 7, icon: "🍛" },
-        { id: "rice", name: "Rice & Biryani", shortName: "Rice & Biryani", count: 4, icon: "🍚", isNew: true },
-        { id: "thali", name: "Rasoi Special Thali", shortName: "Special Thali", count: 2, icon: "🍱" },
-        { id: "parathas", name: "Stuffed Parathas", shortName: "Parathas", count: 4, icon: "🫓" },
-        { id: "breads", name: "Breads & Phulkas", shortName: "Breads", count: 5, icon: "🍞" },
+        { id: "starters", name: "Starters", shortName: "Starters", count: 21, icon: "🌶️" },
+        { id: "snacks", name: "Snacks", shortName: "Snacks", count: 3, icon: "🥟" },
+        { id: "paneer", name: "Paneer", shortName: "Paneer", count: 7, icon: "🧀" },
+        { id: "main-course", name: "Main Course", shortName: "Main Course", count: 7, icon: "🍛" },
+        { id: "rice", name: "Rice & Biryani", shortName: "Rice", count: 4, isNew: true, icon: "🍚" },
+        { id: "thali", name: "Special Thali", shortName: "Thali", count: 2, icon: "🍱" },
+        { id: "parathas", name: "Parathas", shortName: "Parathas", count: 4, icon: "🫓" },
+        { id: "breads", name: "Breads", shortName: "Breads", count: 5, icon: "🍞" },
         { id: "chinese-fast-food", name: "Chinese & Fast Food", shortName: "Chinese", count: 8, icon: "🥢" },
         { id: "soups", name: "Soups", shortName: "Soups", count: 3, icon: "🥣" },
         { id: "raita-sides", name: "Raita & Sides", shortName: "Raita & Sides", count: 4, icon: "🥗" },
-        { id: "beverages", name: "Fluids & Beverages", shortName: "Beverages", count: 3, icon: "🥤" },
-        { id: "desserts", name: "Desserts & Mithai", shortName: "Desserts", count: 4, icon: "🍨" }
+        { id: "beverages", name: "Beverages", shortName: "Beverages", count: 3, icon: "🥤" },
+        { id: "desserts", name: "Desserts", shortName: "Desserts", count: 4, icon: "🍨" }
       ];
       this.activeId = "starters";
 
@@ -423,7 +423,6 @@
       const sheet = document.getElementById('sainik-cat-sheet');
       if (overlay) overlay.classList.add('open');
       if (sheet) sheet.classList.add('open');
-      document.body.style.overflow = 'hidden';
       this.updateActiveRow();
     }
 
@@ -432,7 +431,6 @@
       const sheet = document.getElementById('sainik-cat-sheet');
       if (overlay) overlay.classList.remove('open');
       if (sheet) sheet.classList.remove('open');
-      document.body.style.overflow = '';
     }
 
     toggle() {
@@ -450,27 +448,26 @@
       this.updateActivePills();
       this.updateActiveRow();
 
-      setTimeout(() => {
-        const target = document.getElementById(catId);
-        if (!target) {
-          console.warn('Target category not found:', catId);
-          return;
-        }
+      const target = document.getElementById(catId);
+      if (!target) {
+        console.warn('Target category section not found:', catId);
+        return;
+      }
 
-        const headerOffset = 130;
-        const targetRect = target.getBoundingClientRect();
-        const absoluteTop = window.pageYOffset + targetRect.top;
-        const offsetPosition = Math.max(0, absoluteTop - headerOffset);
+      // Smoothly scroll to the target section with fixed navbar header offset
+      const headerOffset = 135;
+      const targetRect = target.getBoundingClientRect();
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      const offsetPosition = Math.max(0, currentScroll + targetRect.top - headerOffset);
 
-        try {
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        } catch (e) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 60);
+      try {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      } catch (e) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
 
     renderSheetItems() {
@@ -481,7 +478,7 @@
         const newBadge = cat.isNew ? '<span class="sainik-cat-new-badge">NEW</span>' : '';
         const isActive = this.activeId === cat.id ? ' active' : '';
         return `
-          <div class="sainik-cat-row${isActive}" data-cat-id="${cat.id}" onclick="window.sainikMenuNav.scrollToCategory('${cat.id}')">
+          <div class="sainik-cat-row${isActive}" data-cat-id="${cat.id}" role="button" tabindex="0" onclick="window.sainikMenuNav.scrollToCategory('${cat.id}')">
             <div class="sainik-cat-row-left">
               <span class="sainik-cat-row-name">${cat.name}</span>
               ${newBadge}
@@ -490,6 +487,17 @@
           </div>
         `;
       }).join('');
+
+      // Add direct touch/click listeners
+      container.querySelectorAll('.sainik-cat-row').forEach(row => {
+        row.addEventListener('click', (e) => {
+          e.preventDefault();
+          const catId = row.getAttribute('data-cat-id');
+          if (catId) {
+            this.scrollToCategory(catId);
+          }
+        });
+      });
     }
 
     updateActiveRow() {
