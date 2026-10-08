@@ -483,7 +483,6 @@
         return `
           <div class="sainik-cat-row${isActive}" data-cat-id="${cat.id}" onclick="window.sainikMenuNav.scrollToCategory('${cat.id}')">
             <div class="sainik-cat-row-left">
-              <span class="sainik-cat-row-icon">${cat.icon}</span>
               <span class="sainik-cat-row-name">${cat.name}</span>
               ${newBadge}
             </div>

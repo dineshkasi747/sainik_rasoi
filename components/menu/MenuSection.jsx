@@ -108,31 +108,14 @@ export default function MenuSection() {
         </div>
       </div>
 
-      {/* Category Bottom Sheet / Modal (Matching Swiggy/Zomato reference) */}
+      {/* Category Popup Card (Matching Swiggy/Zomato reference) */}
       {isCategorySheetOpen && (
         <>
           <div
             className="sainik-react-overlay"
             onClick={() => setIsCategorySheetOpen(false)}
           />
-          <div className="sainik-react-sheet" role="dialog" aria-modal="true">
-            <div className="sainik-cat-drag-bar" />
-            <div className="sainik-react-sheet-header">
-              <div className="sainik-header-left">
-                <span className="sainik-header-icon">🍽️</span>
-                <div>
-                  <h3 className="sainik-sheet-title">Browse Menu</h3>
-                  <span className="sainik-sheet-sub">{menuCategories.length} categories</span>
-                </div>
-              </div>
-              <button
-                type="button"
-                className="sainik-sheet-close"
-                onClick={() => setIsCategorySheetOpen(false)}
-              >
-                ✕
-              </button>
-            </div>
+          <div className="sainik-react-sheet" role="dialog" aria-modal="true" aria-label="Select Menu Category">
             <div className="sainik-react-sheet-list">
               {menuCategories.map((cat) => {
                 const isActive = activeCategory === cat.id
@@ -451,106 +434,52 @@ export default function MenuSection() {
         .sainik-react-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(10, 8, 7, 0.75);
-          backdrop-filter: blur(8px);
+          background: rgba(0, 0, 0, 0.45);
+          backdrop-filter: blur(3px);
+          -webkit-backdrop-filter: blur(3px);
           z-index: 1050;
         }
         .sainik-react-sheet {
           position: fixed;
-          bottom: 24px;
+          bottom: 84px;
           left: 50%;
           transform: translateX(-50%);
-          width: 92%;
-          max-width: 440px;
-          background: #110d0c;
-          border-radius: 24px;
-          border: 1px solid rgba(200, 105, 58, 0.3);
-          box-shadow: 0 -12px 48px rgba(0, 0, 0, 0.65), 0 0 25px rgba(200, 105, 58, 0.15);
+          width: calc(100% - 44px);
+          max-width: 320px;
+          background: #0c0d10;
+          border-radius: 20px;
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.2);
           z-index: 1060;
           display: flex;
           flex-direction: column;
-          max-height: 80vh;
+          max-height: 380px;
           overflow: hidden;
-          animation: slideUp 0.3s cubic-bezier(0.2, 0.9, 0.25, 1);
+          animation: popIn 0.24s cubic-bezier(0.2, 0.9, 0.25, 1);
         }
-        @keyframes slideUp {
-          from { transform: translateX(-50%) translateY(100%); opacity: 0; }
-          to { transform: translateX(-50%) translateY(0); opacity: 1; }
-        }
-
-        .sainik-cat-drag-bar {
-          width: 40px;
-          height: 4px;
-          background: rgba(255, 255, 255, 0.25);
-          border-radius: 4px;
-          margin: 10px auto 4px;
-        }
-
-        .sainik-react-sheet-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 12px 22px 14px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .sainik-header-left {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .sainik-header-icon {
-          font-size: 1.3rem;
-        }
-        .sainik-sheet-title {
-          margin: 0;
-          font-family: var(--font-heading, serif);
-          font-size: 1.35rem;
-          font-weight: 700;
-          color: #ffffff;
-        }
-        .sainik-sheet-sub {
-          font-size: 0.78rem;
-          color: #bfaea9;
-        }
-        .sainik-sheet-close {
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          color: #ffffff;
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.2s;
-        }
-        .sainik-sheet-close:hover {
-          background: var(--secondary-color, #c8693a);
+        @keyframes popIn {
+          from { transform: translateX(-50%) scale(0.92) translateY(12px); opacity: 0; }
+          to { transform: translateX(-50%) scale(1) translateY(0); opacity: 1; }
         }
 
         .sainik-react-sheet-list {
-          padding: 8px 10px 18px;
+          padding: 8px 0;
           overflow-y: auto;
-          max-height: 60vh;
+          max-height: 364px;
         }
         .sainik-react-sheet-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 13px 18px;
-          border-radius: 12px;
+          padding: 13px 22px;
           cursor: pointer;
-          transition: all 0.2s;
-          border-left: 3px solid transparent;
+          transition: background 0.15s ease;
         }
         .sainik-react-sheet-row:hover {
-          background: rgba(200, 105, 58, 0.12);
-          transform: translateX(3px);
+          background: rgba(255, 255, 255, 0.06);
         }
         .sainik-react-sheet-row.active {
-          background: rgba(200, 105, 58, 0.16);
-          border-left-color: var(--secondary-color, #c8693a);
+          background: rgba(200, 105, 58, 0.15);
         }
         .sainik-row-left {
           display: flex;
@@ -558,30 +487,35 @@ export default function MenuSection() {
           gap: 8px;
         }
         .sainik-row-name {
-          font-size: 1.04rem;
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+          font-size: 1.05rem;
           font-weight: 600;
-          color: #f5ebe6;
-        }
-        .sainik-react-sheet-row:hover .sainik-row-name,
-        .sainik-react-sheet-row.active .sainik-row-name {
-          color: #ffaa7d;
+          color: #ffffff;
+          letter-spacing: 0.1px;
+          line-height: 1.3;
         }
         .sainik-new-badge {
           background: #392b23;
           color: #f7a278;
-          font-size: 0.68rem;
+          font-size: 0.65rem;
           font-weight: 800;
-          padding: 2px 7px;
-          border-radius: 5px;
+          letter-spacing: 0.8px;
+          padding: 2px 6px;
+          border-radius: 4px;
           border: 1px solid rgba(247, 162, 120, 0.4);
+          text-transform: uppercase;
         }
         .sainik-row-count {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           font-size: 1.05rem;
-          font-weight: 700;
-          color: rgba(255, 255, 255, 0.85);
+          font-weight: 600;
+          color: #ffffff;
+          letter-spacing: 0.3px;
+          padding-left: 12px;
         }
         .sainik-react-sheet-row.active .sainik-row-count {
           color: var(--secondary-color, #c8693a);
+          font-weight: 700;
         }
       `}</style>
     </section>

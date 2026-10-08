@@ -376,7 +376,7 @@ if '</head>' in final_html and '/assets/css/sainik-cart.css' not in final_html:
 # Add Cart Drawer HTML, Floating Menu Button & Category Bottom Sheet Modal
 cart_system_code = '''
 <!-- FLOATING MENU CATEGORY LAUNCHER BUTTON -->
-<div id="sainik-floating-menu-btn" class="sainik-floating-menu-btn" onclick="window.sainikMenuNav.open()" role="button" aria-label="Browse Menu Categories">
+<div id="sainik-floating-menu-btn" class="sainik-floating-menu-btn" onclick="window.sainikMenuNav.toggle()" role="button" aria-label="Browse Menu Categories">
   <div class="sainik-menu-pill">
     <svg class="sainik-menu-icon" width="18" height="18" viewBox="0 0 24 24">
       <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/>
@@ -386,20 +386,9 @@ cart_system_code = '''
   </div>
 </div>
 
-<!-- CATEGORY SELECTOR MODAL / BOTTOM SHEET (MATCHING USER SCREENSHOT) -->
+<!-- CATEGORY SELECTOR POPUP CARD (MATCHING USER SCREENSHOT) -->
 <div id="sainik-cat-overlay" class="sainik-cat-overlay" onclick="window.sainikMenuNav.close()"></div>
 <div id="sainik-cat-sheet" class="sainik-cat-sheet" role="dialog" aria-modal="true" aria-label="Select Menu Category">
-  <div class="sainik-cat-drag-bar"></div>
-  <div class="sainik-cat-header">
-    <div class="sainik-cat-header-left">
-      <span class="sainik-cat-header-icon">🍽️</span>
-      <div>
-        <h3 class="sainik-cat-header-title">Browse Menu</h3>
-        <span class="sainik-cat-header-sub">13 categories · 75 dishes</span>
-      </div>
-    </div>
-    <button type="button" class="sainik-cat-close-btn" onclick="window.sainikMenuNav.close()" aria-label="Close menu selector">✕</button>
-  </div>
   <div class="sainik-cat-list" id="sainik-cat-list-items">
     <!-- Populated dynamically by SainikMenuNav -->
   </div>
