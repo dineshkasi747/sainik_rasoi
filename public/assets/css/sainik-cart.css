@@ -792,11 +792,6 @@ body.sainik-cart-open .pxl-switch-button,
    SAINIK RASOI - SWIGGY/ZOMATO STYLE CATEGORY SELECTOR & BOTTOM SHEET
    ========================================================================== */
 
-/* Sticky Category Pills Bar (Top of Menu) */
-.sainik-sticky-cat-bar {
-  position: sticky;
-  top: 75px;
-  z-index: 900;
 /* ==========================================================================
    STICKY CATEGORY PILLS BAR (IMAGE 1 SPEC)
    ========================================================================== */
@@ -833,44 +828,91 @@ body.dark-mode .sainik-sticky-cat-bar {
   display: none;
 }
 
-/* Primary "All" Pill */
+/* Primary "All" Pill (With full active/inactive states) */
 .sainik-cat-pill-all {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 22px;
-  border-radius: 40px;
-  background: #c8693a;
-  color: #ffffff !important;
-  border: none;
-  cursor: pointer;
-  flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(200, 105, 58, 0.35);
-  transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
-  text-decoration: none;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 18px !important;
+  border-radius: 40px !important;
+  background: #fbf6ee !important;
+  color: #2a2423 !important;
+  border: 1px solid rgba(200, 105, 58, 0.22) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04) !important;
+  transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  text-decoration: none !important;
+  font-family: inherit !important;
+  line-height: normal !important;
+}
+.sainik-cat-pill-all .sainik-pill-all-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #2a2423 !important;
+  transition: all 0.2s ease !important;
+}
+.sainik-cat-pill-all .sainik-pill-all-svg {
+  stroke: #2a2423 !important;
+  display: block !important;
+}
+.sainik-cat-pill-all .sainik-pill-all-text {
+  font-family: var(--font-heading, "Cormorant", serif) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  color: #2a2423 !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1 !important;
+  transition: all 0.2s ease !important;
 }
 .sainik-cat-pill-all:hover {
-  background: #b0562b;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(200, 105, 58, 0.45);
+  background: #ffffff !important;
+  border-color: #c8693a !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(200, 105, 58, 0.2) !important;
 }
-.sainik-cat-pill-all:active {
-  transform: translateY(0) scale(0.97);
+.sainik-cat-pill-all.active {
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border-color: #c8693a !important;
+  box-shadow: 0 6px 18px rgba(200, 105, 58, 0.4) !important;
+  transform: translateY(-1px) !important;
 }
-.sainik-pill-all-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.sainik-cat-pill-all.active .sainik-pill-all-icon,
+.sainik-cat-pill-all.active .sainik-pill-all-svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
 }
-.sainik-pill-all-svg {
-  stroke: #ffffff;
+.sainik-cat-pill-all.active .sainik-pill-all-text {
+  color: #ffffff !important;
 }
-.sainik-pill-all-text {
-  font-family: var(--font-heading, "Cormorant", serif);
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.3px;
+
+body.dark-mode .sainik-cat-pill-all {
+  background: #231b18 !important;
+  color: #f5ebe6 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+body.dark-mode .sainik-cat-pill-all .sainik-pill-all-icon,
+body.dark-mode .sainik-cat-pill-all .sainik-pill-all-svg {
+  stroke: #f5ebe6 !important;
+  color: #f5ebe6 !important;
+}
+body.dark-mode .sainik-cat-pill-all .sainik-pill-all-text {
+  color: #f5ebe6 !important;
+}
+body.dark-mode .sainik-cat-pill-all.active {
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border-color: #c8693a !important;
+}
+body.dark-mode .sainik-cat-pill-all.active .sainik-pill-all-icon,
+body.dark-mode .sainik-cat-pill-all.active .sainik-pill-all-svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+body.dark-mode .sainik-cat-pill-all.active .sainik-pill-all-text {
+  color: #ffffff !important;
 }
 
 /* Category Pill Item */
@@ -958,144 +1000,173 @@ body.dark-mode .sainik-cat-pill-item .cat-pill-count {
    UNIFIED FLOATING CART & WHATSAPP ORDER BAR (IMAGE 2 SPEC)
    ========================================================================== */
 .sainik-floating-bar {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1040;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+  position: fixed !important;
+  bottom: 16px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 999980 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
   white-space: nowrap !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  max-width: 95vw;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  width: max-content !important;
+  max-width: calc(100vw - 20px) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
 }
 
 .sainik-float-pill {
-  background: #181311;
-  border-radius: 50px;
-  padding: 5px 8px 5px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
+  background: #181311 !important;
+  border-radius: 40px !important;
+  padding: 4px 6px 4px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.48), 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.25s ease !important;
   white-space: nowrap !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
 }
 .sainik-floating-bar:hover .sainik-float-pill {
-  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.65), 0 0 20px rgba(200, 105, 58, 0.25);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 16px rgba(200, 105, 58, 0.22) !important;
+  transform: translateY(-2px) !important;
 }
 
 /* Left: Cart Info */
 .sainik-float-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #ffffff;
-  font-family: var(--font-heading, "Cormorant", serif);
-  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading, "Cormorant", serif) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
 }
 .sainik-float-cart-icon {
-  stroke: #ffffff;
-  flex-shrink: 0;
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
+  flex-shrink: 0 !important;
 }
 .sainik-float-count-badge {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.3px;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.2px !important;
   white-space: nowrap !important;
+  line-height: 1 !important;
 }
 
 /* Divider */
 .sainik-float-sep {
-  width: 1px;
-  height: 22px;
-  background: rgba(255, 255, 255, 0.16);
-  flex-shrink: 0;
-  margin: 0 2px;
+  width: 1px !important;
+  height: 16px !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  flex-shrink: 0 !important;
+  margin: 0 1px !important;
 }
 
 /* Middle: Terracotta WhatsApp CTA */
 .sainik-float-cta {
-  background: #c8693a;
-  color: #ffffff;
-  border: none;
-  padding: 9px 20px;
-  border-radius: 40px;
-  font-family: var(--font-heading, "Cormorant", serif);
-  font-size: 1.08rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  box-shadow: 0 3px 12px rgba(200, 105, 58, 0.4);
-  transition: all 0.2s ease;
-  flex-shrink: 0;
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 6px 14px !important;
+  border-radius: 30px !important;
+  font-family: var(--font-heading, "Cormorant", serif) !important;
+  font-size: 0.94rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(200, 105, 58, 0.35) !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
   white-space: nowrap !important;
+  line-height: 1.2 !important;
+  box-sizing: border-box !important;
 }
 .sainik-float-cta:hover {
-  background: #b0562b;
-  box-shadow: 0 5px 16px rgba(200, 105, 58, 0.55);
+  background: #b0562b !important;
+  box-shadow: 0 4px 12px rgba(200, 105, 58, 0.5) !important;
 }
 .sainik-float-cta:active {
-  transform: scale(0.97);
+  transform: scale(0.97) !important;
 }
 .sainik-float-wa-icon {
-  fill: #ffffff;
-  flex-shrink: 0;
+  width: 15px !important;
+  height: 15px !important;
+  fill: #ffffff !important;
+  flex-shrink: 0 !important;
 }
 .sainik-float-arrow {
-  font-size: 1.15rem;
-  line-height: 1;
-  transition: transform 0.2s ease;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+  transition: transform 0.2s ease !important;
+  flex-shrink: 0 !important;
 }
 .sainik-float-cta:hover .sainik-float-arrow {
-  transform: translateX(3px);
+  transform: translateX(2px) !important;
+}
+
+/* Full vs Short CTA Text */
+.sainik-cta-full {
+  display: inline !important;
+}
+.sainik-cta-short {
+  display: none !important;
 }
 
 /* Right: Theme Switcher Pill Track */
 .sainik-float-theme-toggle {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  flex-shrink: 0;
-  user-select: none;
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  user-select: none !important;
 }
 .sainik-theme-pill-track {
-  background: #27201d;
-  border-radius: 30px;
-  padding: 3px 5px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.25s ease;
+  background: #27201d !important;
+  border-radius: 20px !important;
+  padding: 2px 3px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.25s ease !important;
 }
 .sainik-theme-pill-track:hover {
-  background: #342a26;
+  background: #342a26 !important;
 }
 .sainik-theme-icon {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
-  stroke: rgba(255, 255, 255, 0.5);
-  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 21px !important;
+  height: 21px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  stroke: rgba(255, 255, 255, 0.5) !important;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  flex-shrink: 0 !important;
+}
+.sainik-theme-icon svg {
+  width: 12px !important;
+  height: 12px !important;
 }
 .sainik-theme-icon.active {
-  background: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
-  stroke: #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Hide legacy floating buttons */
@@ -1106,25 +1177,76 @@ body.dark-mode .sainik-cat-pill-item .cat-pill-count {
 
 @media (max-width: 600px) {
   .sainik-floating-bar {
-    bottom: 14px;
-    width: auto;
-    max-width: calc(100vw - 20px);
+    bottom: 12px !important;
+    max-width: calc(100vw - 16px) !important;
   }
   .sainik-float-pill {
-    padding: 5px 6px 5px 12px;
-    gap: 8px;
+    padding: 3px 5px 3px 9px !important;
+    gap: 6px !important;
+    border-radius: 30px !important;
+  }
+  .sainik-float-info {
+    gap: 4px !important;
+  }
+  .sainik-float-cart-icon {
+    width: 14px !important;
+    height: 14px !important;
   }
   .sainik-float-count-badge {
-    font-size: 1.02rem;
+    font-size: 0.82rem !important;
+  }
+  .sainik-float-sep {
+    height: 13px !important;
+    margin: 0 !important;
   }
   .sainik-float-cta {
-    padding: 8px 14px;
-    font-size: 0.96rem;
-    gap: 6px;
+    padding: 5px 9px !important;
+    font-size: 0.82rem !important;
+    gap: 4px !important;
+    border-radius: 20px !important;
+  }
+  .sainik-float-wa-icon {
+    width: 13px !important;
+    height: 13px !important;
+  }
+  .sainik-float-arrow {
+    font-size: 0.85rem !important;
+  }
+  .sainik-theme-pill-track {
+    padding: 2px 2px !important;
+    gap: 2px !important;
   }
   .sainik-theme-icon {
-    width: 24px;
-    height: 24px;
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .sainik-theme-icon svg {
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .sainik-floating-bar {
+    bottom: 10px !important;
+    max-width: calc(100vw - 12px) !important;
+  }
+  .sainik-float-pill {
+    padding: 3px 4px 3px 8px !important;
+    gap: 5px !important;
+  }
+  .sainik-cta-full {
+    display: none !important;
+  }
+  .sainik-cta-short {
+    display: inline !important;
+  }
+  .sainik-float-cta {
+    padding: 4px 8px !important;
+    font-size: 0.80rem !important;
+  }
+  .sainik-float-count-badge {
+    font-size: 0.80rem !important;
   }
 }
 

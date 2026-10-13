@@ -251,13 +251,11 @@ def render_category_section(cat):
 
 # SVG Icons for Category Pills
 SVG_ICONS = {
-    "all": '''<svg class="sainik-pill-all-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="8" y1="6" x2="21" y2="6"></line>
-      <line x1="8" y1="12" x2="21" y2="12"></line>
-      <line x1="8" y1="18" x2="21" y2="18"></line>
-      <circle cx="4" cy="6" r="1.5" fill="currentColor"></circle>
-      <circle cx="4" cy="12" r="1.5" fill="currentColor"></circle>
-      <circle cx="4" cy="18" r="1.5" fill="currentColor"></circle>
+    "all": '''<svg class="sainik-pill-all-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+      <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+      <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+      <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
     </svg>''',
     "starters": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M4 11h16a1 1 0 0 1 1 1 7 7 0 0 1-14 0 1 1 0 0 1 1-1z"></path>
@@ -272,9 +270,9 @@ SVG_ICONS = {
       <path d="M12 11h.01"></path>
     </svg>''',
     "paneer": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 10h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10z"></path>
-      <path d="M7 10V6a5 5 0 0 1 10 0v4"></path>
-      <circle cx="12" cy="16" r="1.5" fill="currentColor"></circle>
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+      <line x1="12" y1="22.08" x2="12" y2="12"></line>
     </svg>''',
     "main-course": '''<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M3 12h18"></path>
@@ -449,13 +447,172 @@ clean_marker = '<!-- SAINIK RASOI LUXURY THEME-HARMONIOUS WHATSAPP CART SYSTEM -
 if clean_marker in final_html:
     final_html = final_html[:final_html.index(clean_marker)] + '</body></html>'
 
-# Add stylesheet link into <head>
-css_link = '<link rel="stylesheet" href="/assets/css/sainik-cart.css" />\n</head>'
+# Add stylesheet link into <head> with cache-busting
+final_html = final_html.replace('href="/assets/css/sainik-cart.css"', 'href="/assets/css/sainik-cart.css?v=2.2"')
+css_link = '<link rel="stylesheet" href="/assets/css/sainik-cart.css?v=2.2" />\n</head>'
 if '</head>' in final_html and '/assets/css/sainik-cart.css' not in final_html:
     final_html = final_html.replace('</head>', css_link, 1)
 
 # Add Cart Drawer HTML, Category Popover & Unified Floating Bar with Theme Switcher (Matching Image 2)
 cart_system_code = '''
+<style id="sainik-float-bar-critical">
+.sainik-floating-bar {
+  position: fixed !important;
+  bottom: 16px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 999980 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+  white-space: nowrap !important;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  width: max-content !important;
+  max-width: calc(100vw - 20px) !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+.sainik-float-pill {
+  background: #181311 !important;
+  border-radius: 40px !important;
+  padding: 4px 6px 4px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.48), 0 0 1px rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.25s ease !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+.sainik-float-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  color: #ffffff !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+.sainik-float-cart-icon {
+  width: 16px !important;
+  height: 16px !important;
+  stroke: #ffffff !important;
+  flex-shrink: 0 !important;
+}
+.sainik-float-count-badge {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  white-space: nowrap !important;
+}
+.sainik-float-sep {
+  width: 1px !important;
+  height: 16px !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  flex-shrink: 0 !important;
+  margin: 0 1px !important;
+}
+.sainik-float-cta {
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 6px 14px !important;
+  border-radius: 30px !important;
+  font-size: 0.94rem !important;
+  font-weight: 700 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  cursor: pointer !important;
+  box-shadow: 0 2px 8px rgba(200, 105, 58, 0.35) !important;
+  transition: all 0.2s ease !important;
+  flex-shrink: 1 !important;
+  min-width: 0 !important;
+  white-space: nowrap !important;
+  box-sizing: border-box !important;
+}
+.sainik-float-wa-icon {
+  width: 15px !important;
+  height: 15px !important;
+  fill: #ffffff !important;
+  flex-shrink: 0 !important;
+}
+.sainik-float-arrow {
+  font-size: 0.95rem !important;
+  transition: transform 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+.sainik-cta-full { display: inline !important; }
+.sainik-cta-short { display: none !important; }
+.sainik-float-theme-toggle {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+.sainik-theme-pill-track {
+  background: #27201d !important;
+  border-radius: 20px !important;
+  padding: 2px 3px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 3px !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+.sainik-theme-icon {
+  width: 21px !important;
+  height: 21px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  flex-shrink: 0 !important;
+}
+.sainik-theme-icon svg { width: 12px !important; height: 12px !important; }
+.sainik-theme-icon.active {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+}
+@media (max-width: 600px) {
+  .sainik-floating-bar {
+    bottom: 12px !important;
+    max-width: calc(100vw - 16px) !important;
+  }
+  .sainik-float-pill {
+    padding: 3px 5px 3px 9px !important;
+    gap: 6px !important;
+    border-radius: 30px !important;
+  }
+  .sainik-float-info { gap: 4px !important; }
+  .sainik-float-cart-icon { width: 14px !important; height: 14px !important; }
+  .sainik-float-count-badge { font-size: 0.82rem !important; }
+  .sainik-float-sep { height: 13px !important; margin: 0 !important; }
+  .sainik-float-cta { padding: 5px 9px !important; font-size: 0.82rem !important; gap: 4px !important; border-radius: 20px !important; }
+  .sainik-float-wa-icon { width: 13px !important; height: 13px !important; }
+  .sainik-float-arrow { font-size: 0.85rem !important; }
+  .sainik-theme-pill-track { padding: 2px 2px !important; gap: 2px !important; }
+  .sainik-theme-icon { width: 18px !important; height: 18px !important; }
+  .sainik-theme-icon svg { width: 10px !important; height: 10px !important; }
+}
+@media (max-width: 420px) {
+  .sainik-floating-bar {
+    bottom: 10px !important;
+    max-width: calc(100vw - 12px) !important;
+  }
+  .sainik-float-pill {
+    padding: 3px 4px 3px 8px !important;
+    gap: 5px !important;
+  }
+  .sainik-cta-full { display: none !important; }
+  .sainik-cta-short { display: inline !important; }
+  .sainik-float-cta { padding: 4px 8px !important; font-size: 0.80rem !important; }
+  .sainik-float-count-badge { font-size: 0.80rem !important; }
+}
+</style>
 <!-- CATEGORY SELECTOR POPUP CARD (MATCHING USER SCREENSHOT) -->
 <div id="sainik-cat-overlay" class="sainik-cat-overlay" onclick="window.sainikMenuNav.close()"></div>
 <div id="sainik-cat-sheet" class="sainik-cat-sheet" role="dialog" aria-modal="true" aria-label="Select Menu Category">
@@ -469,7 +626,7 @@ cart_system_code = '''
   <div class="sainik-float-pill">
     <!-- Left Section: Cart Icon + Items Count -->
     <div class="sainik-float-info" onclick="event.stopPropagation(); window.sainikCart.open()">
-      <svg class="sainik-float-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <svg class="sainik-float-cart-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="9" cy="21" r="1"></circle>
         <circle cx="20" cy="21" r="1"></circle>
         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -482,10 +639,11 @@ cart_system_code = '''
 
     <!-- Middle Section: Terracotta WhatsApp Order CTA -->
     <button type="button" class="sainik-float-cta" onclick="event.stopPropagation(); window.sainikCart.open()" aria-label="Order on WhatsApp">
-      <svg class="sainik-float-wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+      <svg class="sainik-float-wa-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.892.812 2.796.812 3.179 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.07-1.107-.063-.267-.086-.599-.214-1.028-.399-1.815-.783-3.003-2.617-3.094-2.739-.091-.122-.741-.986-.741-1.881 0-.895.469-1.334.636-1.517.167-.183.365-.228.487-.228.122 0 .243.002.349.007.113.005.263-.043.411.312.153.365.518 1.263.563 1.355.045.091.076.198.015.32-.061.122-.091.198-.183.305-.091.107-.193.239-.275.32-.092.091-.188.19-.081.373.107.183.475.783 1.019 1.268.701.625 1.291.819 1.474.91.183.091.29.076.396-.046.107-.122.457-.533.579-.716.122-.183.244-.152.411-.091.167.061 1.065.502 1.248.594.183.091.305.137.35.213.046.076.046.442-.098.847zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.662 1.442 5.177L2 22l4.981-1.307A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.154c-1.636 0-3.151-.487-4.423-1.326l-.317-.208-2.955.775.789-2.88-.228-.363A8.118 8.118 0 013.846 12c0-4.496 3.658-8.154 8.154-8.154s8.154 3.658 8.154 8.154-3.658 8.154-8.154 8.154z"/>
       </svg>
-      <span>Order on WhatsApp</span>
+      <span class="sainik-cta-full">Order on WhatsApp</span>
+      <span class="sainik-cta-short">Order</span>
       <span class="sainik-float-arrow">→</span>
     </button>
 
@@ -493,7 +651,7 @@ cart_system_code = '''
     <div class="sainik-float-theme-toggle" id="sainik-theme-toggle" onclick="event.stopPropagation(); window.sainikCart.toggleTheme()" role="button" aria-label="Toggle Dark / Light Theme" title="Toggle Dark/Light Mode">
       <div class="sainik-theme-pill-track">
         <span class="sainik-theme-icon sainik-theme-sun active" title="Light Mode">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="4"></circle>
             <line x1="12" y1="2" x2="12" y2="4"></line>
             <line x1="12" y1="20" x2="12" y2="22"></line>
@@ -506,7 +664,7 @@ cart_system_code = '''
           </svg>
         </span>
         <span class="sainik-theme-icon sainik-theme-moon" title="Dark Mode">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </span>

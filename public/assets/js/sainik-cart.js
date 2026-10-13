@@ -452,6 +452,7 @@
     init() {
       this.renderSheetItems();
       this.bindScrollSpy();
+      this.updateActivePills();
     }
 
     open() {
@@ -483,6 +484,18 @@
       this.activeId = catId;
       this.updateActivePills();
       this.updateActiveRow();
+
+      if (catId === 'all') {
+        const firstSection = document.getElementById(this.categories[0]?.id) || document.querySelector('.sainik-sticky-cat-bar');
+        if (firstSection) {
+          const headerOffset = 135;
+          const targetRect = firstSection.getBoundingClientRect();
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+          const offsetPosition = Math.max(0, currentScroll + targetRect.top - headerOffset);
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+        return;
+      }
 
       const target = document.getElementById(catId);
       if (!target) {

@@ -145,7 +145,7 @@ export default function MenuSection() {
       >
         <div className="sainik-float-pill">
           <div className="sainik-float-info">
-            <svg className="sainik-float-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="sainik-float-cart-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1"></circle>
               <circle cx="20" cy="21" r="1"></circle>
               <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -163,10 +163,11 @@ export default function MenuSection() {
               }
             }}
           >
-            <svg className="sainik-float-wa-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <svg className="sainik-float-wa-icon" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.892.812 2.796.812 3.179 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.768-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.07-1.107-.063-.267-.086-.599-.214-1.028-.399-1.815-.783-3.003-2.617-3.094-2.739-.091-.122-.741-.986-.741-1.881 0-.895.469-1.334.636-1.517.167-.183.365-.228.487-.228.122 0 .243.002.349.007.113.005.263-.043.411.312.153.365.518 1.263.563 1.355.045.091.076.198.015.32-.061.122-.091.198-.183.305-.091.107-.193.239-.275.32-.092.091-.188.19-.081.373.107.183.475.783 1.019 1.268.701.625 1.291.819 1.474.91.183.091.29.076.396-.046.107-.122.457-.533.579-.716.122-.183.244-.152.411-.091.167.061 1.065.502 1.248.594.183.091.305.137.35.213.046.076.046.442-.098.847zM12 2C6.477 2 2 6.477 2 12c0 1.891.526 3.662 1.442 5.177L2 22l4.981-1.307A9.957 9.957 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18.154c-1.636 0-3.151-.487-4.423-1.326l-.317-.208-2.955.775.789-2.88-.228-.363A8.118 8.118 0 013.846 12c0-4.496 3.658-8.154 8.154-8.154s8.154 3.658 8.154 8.154-3.658 8.154-8.154 8.154z"/>
             </svg>
-            <span>Order on WhatsApp</span>
+            <span className="sainik-cta-full">Order on WhatsApp</span>
+            <span className="sainik-cta-short">Order</span>
             <span className="sainik-float-arrow">→</span>
           </button>
           <div
@@ -182,7 +183,7 @@ export default function MenuSection() {
           >
             <div className="sainik-theme-pill-track">
               <span className="sainik-theme-icon sainik-theme-sun active">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="12" cy="12" r="4"></circle>
                   <line x1="12" y1="2" x2="12" y2="4"></line>
                   <line x1="12" y1="20" x2="12" y2="22"></line>
@@ -193,7 +194,7 @@ export default function MenuSection() {
                 </svg>
               </span>
               <span className="sainik-theme-icon sainik-theme-moon">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                 </svg>
               </span>
@@ -267,35 +268,49 @@ export default function MenuSection() {
 
         /* "All" Pill */
         .sainik-cat-pill-all {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 9px 22px;
-          border-radius: 40px;
-          background: #c8693a;
-          color: #ffffff !important;
-          border: none;
-          cursor: pointer;
-          flex-shrink: 0;
-          box-shadow: 0 4px 14px rgba(200, 105, 58, 0.35);
-          transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
+          display: inline-flex !important;
+          align-items: center !important;
+          gap: 8px !important;
+          padding: 8px 18px !important;
+          border-radius: 40px !important;
+          background: #fbf6ee !important;
+          color: #2a2423 !important;
+          border: 1px solid rgba(200, 105, 58, 0.22) !important;
+          cursor: pointer !important;
+          flex-shrink: 0 !important;
+          box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04) !important;
+          transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
         }
-        .sainik-cat-pill-all:hover {
-          background: #b0562b;
-          transform: translateY(-1px);
-          box-shadow: 0 6px 18px rgba(200, 105, 58, 0.45);
-        }
-        .sainik-pill-all-icon {
+        .sainik-cat-pill-all .sainik-pill-all-icon {
           display: flex;
           align-items: center;
           justify-content: center;
+          color: #2a2423;
         }
-        .sainik-pill-all-text {
+        .sainik-cat-pill-all .sainik-pill-all-text {
           font-family: var(--font-heading, "Cormorant", serif);
-          font-size: 1.15rem;
+          font-size: 1.1rem;
           font-weight: 700;
+          color: #2a2423;
+          letter-spacing: 0.2px;
+        }
+        .sainik-cat-pill-all:hover {
+          background: #ffffff !important;
+          border-color: #c8693a !important;
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(200, 105, 58, 0.2);
+        }
+        .sainik-cat-pill-all.active {
+          background: #c8693a !important;
+          color: #ffffff !important;
+          border-color: #c8693a !important;
+          box-shadow: 0 6px 18px rgba(200, 105, 58, 0.4);
+        }
+        .sainik-cat-pill-all.active .sainik-pill-all-icon {
           color: #ffffff;
-          letter-spacing: 0.3px;
+        }
+        .sainik-cat-pill-all.active .sainik-pill-all-text {
+          color: #ffffff;
         }
 
         /* Category Item Pill */
@@ -567,76 +582,87 @@ export default function MenuSection() {
           white-space: nowrap !important;
           transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
           max-width: 95vw;
+          bottom: 18px !important;
         }
         .sainik-float-pill {
           background: #181311;
-          border-radius: 50px;
-          padding: 5px 8px 5px 18px;
+          border-radius: 40px;
+          padding: 4px 6px 4px 14px;
           display: flex;
           align-items: center;
-          gap: 12px;
-          box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55), 0 0 1px rgba(255, 255, 255, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+          gap: 9px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.48), 0 0 1px rgba(255, 255, 255, 0.15);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           transition: all 0.3s ease;
         }
         .sainik-floating-bar:hover .sainik-float-pill {
-          box-shadow: 0 16px 42px rgba(0, 0, 0, 0.65), 0 0 20px rgba(200, 105, 58, 0.25);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 16px rgba(200, 105, 58, 0.22);
           transform: translateY(-2px);
         }
         .sainik-float-info {
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
           color: #ffffff;
           font-family: var(--font-heading, "Cormorant", serif);
           cursor: pointer;
         }
         .sainik-float-cart-icon {
+          width: 16px !important;
+          height: 16px !important;
           stroke: #ffffff;
           flex-shrink: 0;
         }
         .sainik-float-count-badge {
-          font-size: 1.15rem;
+          font-size: 0.95rem;
           font-weight: 700;
           color: #ffffff;
-          letter-spacing: 0.3px;
+          letter-spacing: 0.2px;
+          line-height: 1;
         }
         .sainik-float-sep {
           width: 1px;
-          height: 22px;
+          height: 16px;
           background: rgba(255, 255, 255, 0.16);
           flex-shrink: 0;
-          margin: 0 2px;
+          margin: 0 1px;
         }
         .sainik-float-cta {
           background: #c8693a;
           color: #ffffff;
           border: none;
-          padding: 9px 20px;
-          border-radius: 40px;
+          padding: 6px 14px;
+          border-radius: 30px;
           font-family: var(--font-heading, "Cormorant", serif);
-          font-size: 1.08rem;
+          font-size: 0.94rem;
           font-weight: 700;
-          letter-spacing: 0.3px;
+          letter-spacing: 0.2px;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
           cursor: pointer;
-          box-shadow: 0 3px 12px rgba(200, 105, 58, 0.4);
+          box-shadow: 0 2px 8px rgba(200, 105, 58, 0.35);
           transition: all 0.2s ease;
           flex-shrink: 0;
+          line-height: 1.2;
         }
         .sainik-float-cta:hover {
           background: #b0562b;
-          box-shadow: 0 5px 16px rgba(200, 105, 58, 0.55);
+          box-shadow: 0 4px 12px rgba(200, 105, 58, 0.5);
         }
         .sainik-float-wa-icon {
+          width: 15px !important;
+          height: 15px !important;
           fill: #ffffff;
           flex-shrink: 0;
         }
         .sainik-float-arrow {
-          font-size: 1.15rem;
+          font-size: 0.95rem;
           line-height: 1;
+          transition: transform 0.2s ease;
+        }
+        .sainik-float-cta:hover .sainik-float-arrow {
+          transform: translateX(2px);
         }
         .sainik-float-theme-toggle {
           display: flex;
@@ -646,16 +672,20 @@ export default function MenuSection() {
         }
         .sainik-theme-pill-track {
           background: #27201d;
-          border-radius: 30px;
-          padding: 3px 5px;
+          border-radius: 20px;
+          padding: 2px 3px;
           display: flex;
           align-items: center;
-          gap: 6px;
+          gap: 3px;
           border: 1px solid rgba(255, 255, 255, 0.08);
+          transition: all 0.25s ease;
+        }
+        .sainik-theme-pill-track:hover {
+          background: #342a26;
         }
         .sainik-theme-icon {
-          width: 26px;
-          height: 26px;
+          width: 21px;
+          height: 21px;
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -664,33 +694,55 @@ export default function MenuSection() {
           stroke: rgba(255, 255, 255, 0.5);
           transition: all 0.25s ease;
         }
+        .sainik-theme-icon svg {
+          width: 12px !important;
+          height: 12px !important;
+        }
         .sainik-theme-icon.active {
           background: rgba(255, 255, 255, 0.16);
           color: #ffffff;
           stroke: #ffffff;
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         }
+
+        .sainik-cta-full { display: inline !important; }
+        .sainik-cta-short { display: none !important; }
 
         @media (max-width: 600px) {
           .sainik-floating-bar {
-            bottom: 14px;
-            max-width: calc(100vw - 20px);
+            bottom: 12px !important;
+            max-width: calc(100vw - 16px) !important;
           }
           .sainik-float-pill {
-            padding: 5px 6px 5px 12px;
-            gap: 8px;
+            padding: 3px 5px 3px 9px !important;
+            gap: 6px !important;
+            border-radius: 30px !important;
           }
-          .sainik-float-count-badge {
-            font-size: 1.02rem;
+          .sainik-float-info { gap: 4px !important; }
+          .sainik-float-cart-icon { width: 14px !important; height: 14px !important; }
+          .sainik-float-count-badge { font-size: 0.82rem !important; }
+          .sainik-float-sep { height: 13px !important; margin: 0 !important; }
+          .sainik-float-cta { padding: 5px 9px !important; font-size: 0.82rem !important; gap: 4px !important; border-radius: 20px !important; }
+          .sainik-float-wa-icon { width: 13px !important; height: 13px !important; }
+          .sainik-float-arrow { font-size: 0.85rem !important; }
+          .sainik-theme-pill-track { padding: 2px 2px !important; gap: 2px !important; }
+          .sainik-theme-icon { width: 18px !important; height: 18px !important; }
+          .sainik-theme-icon svg { width: 10px !important; height: 10px !important; }
+        }
+
+        @media (max-width: 420px) {
+          .sainik-floating-bar {
+            bottom: 10px !important;
+            max-width: calc(100vw - 12px) !important;
           }
-          .sainik-float-cta {
-            padding: 8px 14px;
-            font-size: 0.96rem;
-            gap: 6px;
+          .sainik-float-pill {
+            padding: 3px 4px 3px 8px !important;
+            gap: 5px !important;
           }
-          .sainik-theme-icon {
-            width: 24px;
-            height: 24px;
-          }
+          .sainik-cta-full { display: none !important; }
+          .sainik-cta-short { display: inline !important; }
+          .sainik-float-cta { padding: 4px 8px !important; font-size: 0.80rem !important; }
+          .sainik-float-count-badge { font-size: 0.80rem !important; }
         }
 
         /* Overlay & Bottom Sheet */
