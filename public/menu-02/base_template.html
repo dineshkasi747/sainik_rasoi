@@ -1664,8 +1664,8 @@ var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof H
     <!-- Home Delivery Container -->
     <div id="sainik-delivery-inputs-container" class="sainik-cart-inputs">
       <div class="sainik-input-group">
-        <label for="sainik-order-name">Your Name</label>
-        <input type="text" id="sainik-order-name" placeholder="e.g. Vikram Sharma" autocomplete="name" />
+        <label for="sainik-order-phone">Phone Number</label>
+        <input type="tel" id="sainik-order-phone" placeholder="e.g. 98765 43210" autocomplete="tel" />
       </div>
 
       <div class="sainik-input-group">
@@ -1699,19 +1699,15 @@ var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof H
 
       <div class="sainik-input-group">
         <label for="sainik-order-notes">Cooking Instructions / Notes</label>
-        <input type="text" id="sainik-order-notes" placeholder="e.g. Medium spicy, extra chutney" />
+        <input type="text" id="sainik-order-notes" placeholder="e.g. Medium spicy, extra chutney (optional)" />
       </div>
     </div>
 
     <!-- Takeaway / Dine-in Container -->
-    <div id="sainik-takeaway-inputs-container" class="sainik-cart-inputs" style="display:none;">
+    <div id="sainik-takeaway-inputs-container" class="sainik-cart-inputs sainik-hidden" style="display:none;">
       <div class="sainik-input-group">
-        <label for="sainik-takeaway-name">Your Name</label>
-        <input type="text" id="sainik-takeaway-name" placeholder="e.g. Vikram Sharma" autocomplete="name" />
-      </div>
-      <div class="sainik-input-group">
-        <label for="sainik-takeaway-table">Table No. or Pickup Time</label>
-        <input type="text" id="sainik-takeaway-table" placeholder="e.g. Table 4 / Pickup in 20 mins" />
+        <label for="sainik-takeaway-phone">Phone Number</label>
+        <input type="tel" id="sainik-takeaway-phone" placeholder="e.g. 98765 43210" autocomplete="tel" />
       </div>
       <div class="sainik-status-banner info">
         <div class="sainik-status-icon">🍽️</div>
@@ -1721,7 +1717,7 @@ var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof H
       </div>
       <div class="sainik-input-group">
         <label for="sainik-takeaway-notes">Cooking Instructions / Notes</label>
-        <input type="text" id="sainik-takeaway-notes" placeholder="e.g. Medium spicy, extra chutney" />
+        <input type="text" id="sainik-takeaway-notes" placeholder="e.g. Medium spicy, extra chutney (optional)" />
       </div>
     </div>
 

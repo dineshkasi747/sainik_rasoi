@@ -94,13 +94,25 @@
       if (type === 'delivery') {
         tabDelivery && tabDelivery.classList.add('active');
         tabTakeaway && tabTakeaway.classList.remove('active');
-        if (deliveryContainer) deliveryContainer.style.display = 'flex';
-        if (takeawayContainer) takeawayContainer.style.display = 'none';
+        if (deliveryContainer) {
+          deliveryContainer.style.display = 'flex';
+          deliveryContainer.classList.remove('sainik-hidden');
+        }
+        if (takeawayContainer) {
+          takeawayContainer.style.display = 'none';
+          takeawayContainer.classList.add('sainik-hidden');
+        }
       } else {
         tabTakeaway && tabTakeaway.classList.add('active');
         tabDelivery && tabDelivery.classList.remove('active');
-        if (takeawayContainer) takeawayContainer.style.display = 'flex';
-        if (deliveryContainer) deliveryContainer.style.display = 'none';
+        if (takeawayContainer) {
+          takeawayContainer.style.display = 'flex';
+          takeawayContainer.classList.remove('sainik-hidden');
+        }
+        if (deliveryContainer) {
+          deliveryContainer.style.display = 'none';
+          deliveryContainer.classList.add('sainik-hidden');
+        }
       }
 
       this.updateDeliveryStatus();
@@ -338,14 +350,14 @@
           return;
         }
 
-        const custName = document.getElementById('sainik-order-name')?.value.trim() || '';
+        const phone = document.getElementById('sainik-order-phone')?.value.trim() || '';
         const address = document.getElementById('sainik-order-address')?.value.trim() || '';
         const notes = document.getElementById('sainik-order-notes')?.value.trim() || '';
 
         let text = '*🛵 NEW HOME DELIVERY ORDER — SAINIK RASOI*\n';
         text += '================================\n';
         text += '*Customer Information:*\n';
-        if (custName) text += '• Name: ' + custName + '\n';
+        if (phone) text += '• Phone: ' + phone + '\n';
         if (address) text += '• Address: ' + address + '\n';
         text += '• Distance: ~' + this.distanceKm.toFixed(1) + ' km (within 7 km zone)\n';
         text += '--------------------------------\n';
@@ -372,15 +384,14 @@
         window.open(url, '_blank');
       } else {
         // Takeaway / Dine-in
-        const custName = document.getElementById('sainik-takeaway-name')?.value.trim() || '';
-        const table = document.getElementById('sainik-takeaway-table')?.value.trim() || '';
+        const phone = document.getElementById('sainik-takeaway-phone')?.value.trim() || '';
         const notes = document.getElementById('sainik-takeaway-notes')?.value.trim() || '';
 
         let text = '*🍽️ NEW TAKEAWAY / DINE-IN ORDER — SAINIK RASOI*\n';
         text += '================================\n';
         text += '*Customer Information:*\n';
-        if (custName) text += '• Name: ' + custName + '\n';
-        if (table) text += '• Table / Pickup Time: ' + table + '\n';
+        if (phone) text += '• Phone: ' + phone + '\n';
+        text += '• Order Type: Takeaway / Pickup at Sainik Rasoi\n';
         text += '--------------------------------\n';
 
         text += '*Items Ordered:*\n';
