@@ -345,11 +345,11 @@ for cat in CATEGORIES:
     title = cat['title']
     count = len(cat['items'])
     icon_svg = SVG_ICONS.get(cat_id, SVG_ICONS['starters'])
-    pills_html.append(f'''    <a href="#{cat_id}" class="sainik-cat-pill-item" data-cat-id="{cat_id}" onclick="event.preventDefault(); window.sainikMenuNav.scrollToCategory('{cat_id}')">
+    pills_html.append(f'''    <button type="button" class="sainik-cat-pill-item" data-cat-id="{cat_id}">
       <span class="sainik-cat-pill-icon">{icon_svg}</span>
       <span class="sainik-cat-pill-name">{title}</span>
       <span class="cat-pill-count">{count}</span>
-    </a>''')
+    </button>''')
 
 pills_html.append('  </div>')
 pills_html.append('</div>')

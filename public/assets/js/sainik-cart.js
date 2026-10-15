@@ -462,8 +462,26 @@
 
     init() {
       this.renderSheetItems();
+      this.bindPillsClick();
       this.bindScrollSpy();
       this.updateActivePills();
+    }
+
+    bindPillsClick() {
+      const scrollContainer = document.querySelector('.sainik-cat-pills-scroll');
+      if (scrollContainer) {
+        scrollContainer.addEventListener('click', (e) => {
+          const pill = e.target.closest('.sainik-cat-pill-item');
+          if (pill) {
+            e.preventDefault();
+            e.stopPropagation();
+            const catId = pill.getAttribute('data-cat-id');
+            if (catId) {
+              this.scrollToCategory(catId);
+            }
+          }
+        });
+      }
     }
 
     open() {
@@ -490,19 +508,36 @@
       }
     }
 
+    getHeaderOffset() {
+      const isHeaderFixed = !!document.querySelector('.pxl-header-elementor-sticky.pxl-header-fixed');
+      const stickyBar = document.querySelector('.sainik-sticky-cat-bar');
+      const barHeight = stickyBar ? stickyBar.offsetHeight : 58;
+      // Fixed desktop header is 70px. Leave 15px clean spacing below sticky category bar
+      return isHeaderFixed ? (70 + barHeight + 15) : (barHeight + 15);
+    }
+
     scrollToCategory(catId) {
       this.close();
+
       this.activeId = catId;
       this.updateActivePills();
       this.updateActiveRow();
 
+      // Lock scrollspy during programmatic smooth scrolling so it doesn't fight or reverse
+      this.isProgrammaticScroll = true;
+      clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        this.isProgrammaticScroll = false;
+      }, 1600);
+
+      const headerOffset = this.getHeaderOffset();
+
       if (catId === 'all') {
         const firstSection = document.getElementById(this.categories[0]?.id) || document.querySelector('.sainik-sticky-cat-bar');
         if (firstSection) {
-          const headerOffset = 135;
           const targetRect = firstSection.getBoundingClientRect();
           const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
-          const offsetPosition = Math.max(0, currentScroll + targetRect.top - headerOffset);
+          const offsetPosition = Math.max(0, Math.round(currentScroll + targetRect.top - headerOffset));
           window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
         return;
@@ -515,19 +550,14 @@
       }
 
       // Smoothly scroll to the target section with fixed navbar header offset
-      const headerOffset = 135;
       const targetRect = target.getBoundingClientRect();
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      const offsetPosition = Math.max(0, currentScroll + targetRect.top - headerOffset);
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const offsetPosition = Math.max(0, Math.round(currentScroll + targetRect.top - headerOffset));
 
-      try {
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      } catch (e) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
 
     renderSheetItems() {
@@ -538,7 +568,7 @@
         const newBadge = cat.isNew ? '<span class="sainik-cat-new-badge">NEW</span>' : '';
         const isActive = this.activeId === cat.id ? ' active' : '';
         return `
-          <div class="sainik-cat-row${isActive}" data-cat-id="${cat.id}" role="button" tabindex="0" onclick="window.sainikMenuNav.scrollToCategory('${cat.id}')">
+          <div class="sainik-cat-row${isActive}" data-cat-id="${cat.id}" role="button" tabindex="0">
             <div class="sainik-cat-row-left">
               <span class="sainik-cat-row-name">${cat.name}</span>
               ${newBadge}
@@ -552,6 +582,7 @@
       container.querySelectorAll('.sainik-cat-row').forEach(row => {
         row.addEventListener('click', (e) => {
           e.preventDefault();
+          e.stopPropagation();
           const catId = row.getAttribute('data-cat-id');
           if (catId) {
             this.scrollToCategory(catId);
@@ -573,46 +604,110 @@
 
     updateActivePills() {
       const allBtn = document.querySelector('.sainik-cat-pill-all');
+      const pillsContainer = document.querySelector('.sainik-cat-pills-scroll');
+      let activePillEl = null;
+
       document.querySelectorAll('.sainik-cat-pill-item').forEach(pill => {
         const id = pill.getAttribute('data-cat-id');
         if (id === this.activeId) {
           pill.classList.add('active');
-          try {
-            pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          } catch(e) {}
+          activePillEl = pill;
         } else {
           pill.classList.remove('active');
         }
       });
+
       if (allBtn) {
         if (!this.activeId || this.activeId === 'all') {
           allBtn.classList.add('active');
+          if (pillsContainer) {
+            pillsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+          }
         } else {
           allBtn.classList.remove('active');
         }
       }
+
+      if (activePillEl && pillsContainer) {
+        // Horizontally center active pill in container ONLY - NO vertical window scroll!
+        const pillLeft = activePillEl.offsetLeft;
+        const pillWidth = activePillEl.offsetWidth;
+        const containerWidth = pillsContainer.clientWidth;
+        const targetScrollLeft = pillLeft - (containerWidth / 2) + (pillWidth / 2);
+        pillsContainer.scrollTo({
+          left: Math.max(0, Math.round(targetScrollLeft)),
+          behavior: 'smooth'
+        });
+      }
     }
 
     bindScrollSpy() {
-      const sections = this.categories.map(c => document.getElementById(c.id)).filter(Boolean);
-      if (!sections.length) return;
-
+      const getSections = () => this.categories.map(c => document.getElementById(c.id)).filter(Boolean);
       let ticking = false;
+
+      // Unlock programmatic scroll lock ONLY on real user gesture (mouse wheel or finger touch-drag)
+      const unlock = () => {
+        if (this.isProgrammaticScroll) {
+          this.isProgrammaticScroll = false;
+          clearTimeout(this.scrollTimeout);
+        }
+      };
+      window.addEventListener('wheel', unlock, { passive: true });
+      window.addEventListener('touchmove', unlock, { passive: true });
+
       window.addEventListener('scroll', () => {
+        if (this.isProgrammaticScroll) return;
+
         if (!ticking) {
           window.requestAnimationFrame(() => {
-            const scrollPos = window.scrollY + 140;
-            let current = sections[0].id;
-            for (let i = 0; i < sections.length; i++) {
-              if (sections[i].offsetTop <= scrollPos) {
-                current = sections[i].id;
+            if (this.isProgrammaticScroll) {
+              ticking = false;
+              return;
+            }
+
+            const sections = getSections();
+            if (!sections.length) {
+              ticking = false;
+              return;
+            }
+
+            // Sync sticky bar top position if sticky desktop header is active
+            const isHeaderFixed = !!document.querySelector('.pxl-header-elementor-sticky.pxl-header-fixed');
+            document.body.classList.toggle('has-sticky-header-active', isHeaderFixed);
+            const stickyBar = document.querySelector('.sainik-sticky-cat-bar');
+            if (stickyBar) {
+              const expectedTop = isHeaderFixed ? '70px' : '0px';
+              if (stickyBar.style.top !== expectedTop) {
+                stickyBar.style.top = expectedTop;
               }
             }
+
+            const headerOffset = this.getHeaderOffset();
+            const threshold = headerOffset + 35;
+
+            // Check if user is scrolled near the bottom of the page
+            const scrollBottom = window.innerHeight + (window.pageYOffset || document.documentElement.scrollTop || 0);
+            const docHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            const isBottom = scrollBottom >= (docHeight - 60);
+
+            let current = 'all';
+            if (isBottom) {
+              current = sections[sections.length - 1].id;
+            } else {
+              for (let i = 0; i < sections.length; i++) {
+                const rect = sections[i].getBoundingClientRect();
+                if (rect.top <= threshold) {
+                  current = sections[i].id;
+                }
+              }
+            }
+
             if (this.activeId !== current) {
               this.activeId = current;
               this.updateActivePills();
               this.updateActiveRow();
             }
+
             ticking = false;
           });
           ticking = true;
