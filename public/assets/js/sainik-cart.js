@@ -629,15 +629,34 @@
       }
 
       if (activePillEl && pillsContainer) {
-        // Horizontally center active pill in container ONLY - NO vertical window scroll!
         const pillLeft = activePillEl.offsetLeft;
         const pillWidth = activePillEl.offsetWidth;
         const containerWidth = pillsContainer.clientWidth;
-        const targetScrollLeft = pillLeft - (containerWidth / 2) + (pillWidth / 2);
-        pillsContainer.scrollTo({
-          left: Math.max(0, Math.round(targetScrollLeft)),
-          behavior: 'smooth'
-        });
+
+        // When viewing the first categories ("all" or "starters"), always stay cleanly at left: 0
+        // so "All" and "Starters" are never sliced off at the left screen edge
+        const isAtStart = !this.activeId || this.activeId === 'all' || this.activeId === 'starters' || pillLeft < 110;
+
+        if (isAtStart) {
+          pillsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Keep active pill comfortably visible with side margins (never cutoff)
+          const currentScroll = pillsContainer.scrollLeft;
+          const minVisibleLeft = currentScroll + 24;
+          const maxVisibleRight = currentScroll + containerWidth - 24;
+
+          if (pillLeft < minVisibleLeft) {
+            pillsContainer.scrollTo({
+              left: Math.max(0, Math.round(pillLeft - 24)),
+              behavior: 'smooth'
+            });
+          } else if ((pillLeft + pillWidth) > maxVisibleRight) {
+            pillsContainer.scrollTo({
+              left: Math.max(0, Math.round(pillLeft + pillWidth - containerWidth + 24)),
+              behavior: 'smooth'
+            });
+          }
+        }
       }
     }
 

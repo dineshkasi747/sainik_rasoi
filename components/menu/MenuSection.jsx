@@ -315,59 +315,93 @@ export default function MenuSection() {
 
         /* Category Item Pill */
         .sainik-cat-pill-item {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 16px 8px 14px;
-          border-radius: 40px;
-          background: #fbf6ee;
+          display: inline-flex !important;
+          flex-direction: row !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 6px !important;
+          height: 38px !important;
+          min-height: 38px !important;
+          max-height: 38px !important;
+          padding: 0 14px 0 12px !important;
+          border-radius: 40px !important;
+          background: #fbf6ee !important;
           color: #2a2423 !important;
-          border: 1px solid rgba(200, 105, 58, 0.22);
-          cursor: pointer;
-          flex-shrink: 0;
-          box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04);
-          transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
-          white-space: nowrap;
+          border: 1px solid rgba(200, 105, 58, 0.22) !important;
+          cursor: pointer !important;
+          flex-shrink: 0 !important;
+          white-space: nowrap !important;
+          box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04) !important;
+          transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+          font-family: inherit !important;
+          font-size: 0.95rem !important;
+          line-height: 1 !important;
+          box-sizing: border-box !important;
+          margin: 0 !important;
+          outline: none !important;
+          width: auto !important;
+          min-width: auto !important;
         }
         .sainik-cat-pill-item:hover {
-          background: #ffffff;
-          border-color: #c8693a;
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(200, 105, 58, 0.2);
+          background: #ffffff !important;
+          border-color: #c8693a !important;
+          box-shadow: 0 4px 12px rgba(200, 105, 58, 0.2) !important;
         }
         .sainik-cat-pill-item.active {
           background: #c8693a !important;
           color: #ffffff !important;
           border-color: #c8693a !important;
-          box-shadow: 0 6px 18px rgba(200, 105, 58, 0.4);
-          transform: translateY(-1px);
+          box-shadow: 0 4px 14px rgba(200, 105, 58, 0.4) !important;
         }
         .sainik-cat-pill-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          color: #2a2423;
-          stroke: #2a2423;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          color: #2a2423 !important;
+          stroke: #2a2423 !important;
+          width: 16px !important;
+          height: 16px !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          flex-shrink: 0 !important;
+          line-height: 1 !important;
         }
-        .sainik-cat-pill-item.active .sainik-cat-pill-icon {
+        .sainik-cat-pill-icon svg {
+          stroke: currentColor !important;
+          width: 16px !important;
+          height: 16px !important;
+          display: block !important;
+        }
+        .sainik-cat-pill-item.active .sainik-cat-pill-icon,
+        .sainik-cat-pill-item.active .sainik-cat-pill-icon svg {
           color: #ffffff !important;
           stroke: #ffffff !important;
         }
         .sainik-cat-pill-name {
-          font-family: var(--font-heading, "Cormorant", serif);
-          font-size: 1.1rem;
-          font-weight: 700;
-          letter-spacing: 0.2px;
+          display: inline-block !important;
+          font-family: var(--font-heading, "Cormorant", serif) !important;
+          font-size: 1.05rem !important;
+          font-weight: 700 !important;
+          color: inherit !important;
+          letter-spacing: 0.2px !important;
+          line-height: 1 !important;
+          margin: 0 !important;
+          padding: 0 !important;
         }
         .sainik-cat-pill-item .cat-pill-count {
-          background: #f5dfd3;
-          color: #9e4b24;
-          font-size: 0.82rem;
-          font-weight: 700;
-          padding: 2px 7px;
-          border-radius: 12px;
-          margin-left: 2px;
-          line-height: 1.1;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          background: rgba(200, 105, 58, 0.14) !important;
+          color: #9e4b24 !important;
+          font-size: 0.78rem !important;
+          font-weight: 700 !important;
+          padding: 2px 6px !important;
+          border-radius: 12px !important;
+          margin-left: 2px !important;
+          line-height: 1 !important;
+          height: 18px !important;
+          box-sizing: border-box !important;
         }
         .sainik-cat-pill-item.active .cat-pill-count {
           background: rgba(255, 255, 255, 0.28) !important;

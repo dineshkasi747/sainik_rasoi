@@ -168,7 +168,7 @@
     }
   }
 </style>
-<link rel="stylesheet" href="/assets/css/sainik-cart.css?v=2.2" />
+<link rel="stylesheet" href="/assets/css/sainik-cart.css?v=3.0" />
 </head><body class="wp-singular page-template-default page page-id-80 wp-theme-hungrybuzz theme-hungrybuzz woocommerce-no-js woo-variation-swatches wvs-behavior-blur wvs-theme-hungrybuzz wvs-show-label wvs-tooltip  pxl-redux-page elementor-default elementor-kit-7 elementor-page elementor-page-80"><div id="pxl-wapper" class="pxl-wapper"><header id="pxl-header-elementor" class="is-sticky"><div class="pxl-header-elementor-main px-header--default"><div class="pxl-header-content"><div class="row"><div class="col-12"><div data-elementor-type="wp-post" data-elementor-id="15" class="elementor elementor-15"><section class="elementor-section elementor-top-section elementor-element elementor-element-28994bf elementor-section-full_width pxl-section-bg-normal elementor-section-height-default elementor-section-height-default pxl-type-header-none pxl-section-padding-none pxl-section-offset-none pxl-row-scroll-none pxl-bg-color-none parallax-none" data-id="28994bf" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}"><div class="elementor-container elementor-column-gap-default "><div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-fa8e36e pxl-col-none pxl-column-none" data-id="fa8e36e" data-element_type="column"><div class="elementor-widget-wrap elementor-element-populated"><div class="elementor-element elementor-element-b04f616 elementor-widget__width-auto elementor-widget elementor-widget-pxl_icon_cart" data-id="b04f616" data-element_type="widget" data-widget_type="pxl_icon_cart.default"><div class="elementor-widget-container"><div class="pxl-cart-sidebar-button pxl-anchor side-panel pxl-transtion" data-target=".pxl-side-cart" data-cursor="-hidden"> <i aria-hidden="true" class="fal fa-shopping-basket"></i> <span data-tip="0" class="pxl-cart-counters">0</span></div></div></div><div class="elementor-element elementor-element-25a0426 elementor-widget__width-auto elementor-widget elementor-widget-pxl_icon_wishlist" data-id="25a0426" data-element_type="widget" data-widget_type="pxl_icon_wishlist.default"><div class="elementor-widget-container"><div class="pxl-wishlist-button"> <a class="pxl-woosw-btn" href="../wishlist/index.html"></a> <i aria-hidden="true" class=" icon-heart"></i> <span data-tip="0" class="wishlist-count"> 0 </span></div></div></div></div></div><div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-c38dc9c pxl-col-none pxl-column-none" data-id="c38dc9c" data-element_type="column"><div class="elementor-widget-wrap elementor-element-populated"><div class="elementor-element elementor-element-5d031e2 elementor-widget__width-auto nav-menu-effect menu-fade elementor-widget elementor-widget-pxl_menu" data-id="5d031e2" data-element_type="widget" data-widget_type="pxl_menu.default"><div class="elementor-widget-container"><div class="pxl-nav-menu pxl-nav-menu1"><div class="menu-menu-home-01-left-container"><ul id="menu-menu-home-01-left" class="pxl-menu-primary clearfix menu-style2">
 <li class="menu-item"><a href="/"><span>Home</span></a></li>
 <li class="menu-item"><a href="/about"><span>About</span></a></li>
@@ -1984,6 +1984,250 @@ var e="script#wp-emoji-settings",t=document.querySelector(e);if(!(t instanceof H
 //# sourceURL=https://demo.bravisthemes.com/hungrybuzz/wp-includes/js/wp-emoji-loader.min.js </script>
 
 <style id="sainik-float-bar-critical">
+/* Critical Category Pills Bar Alignment */
+.sainik-sticky-cat-bar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 998 !important;
+  background: rgba(250, 245, 237, 0.96) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-bottom: 1px solid rgba(200, 105, 58, 0.16) !important;
+  padding: 8px 0 !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 4px 16px rgba(42, 36, 35, 0.04) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+body.has-sticky-header-active .sainik-sticky-cat-bar,
+body:has(.pxl-header-elementor-sticky.pxl-header-fixed) .sainik-sticky-cat-bar {
+  top: 70px !important;
+}
+body.dark-mode .sainik-sticky-cat-bar {
+  background: rgba(23, 18, 16, 0.96) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+.sainik-cat-pills-scroll {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  padding: 4px 16px !important;
+  scroll-behavior: smooth !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+.sainik-cat-pills-scroll::-webkit-scrollbar {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+}
+.sainik-cat-pill-all {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 0 16px !important;
+  border-radius: 40px !important;
+  background: #fbf6ee !important;
+  color: #2a2423 !important;
+  border: 1px solid rgba(200, 105, 58, 0.22) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  outline: none !important;
+  width: auto !important;
+  min-width: auto !important;
+}
+.sainik-cat-pill-all .sainik-pill-all-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #2a2423 !important;
+  stroke: #2a2423 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+.sainik-cat-pill-all .sainik-pill-all-svg {
+  stroke: #2a2423 !important;
+  display: block !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+.sainik-cat-pill-all .sainik-pill-all-text {
+  font-family: var(--font-heading, "Cormorant", serif) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: #2a2423 !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sainik-cat-pill-all.active {
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border-color: #c8693a !important;
+  box-shadow: 0 4px 14px rgba(200, 105, 58, 0.4) !important;
+}
+.sainik-cat-pill-all.active .sainik-pill-all-icon,
+.sainik-cat-pill-all.active .sainik-pill-all-svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+.sainik-cat-pill-all.active .sainik-pill-all-text {
+  color: #ffffff !important;
+}
+.sainik-cat-pill-item {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
+  padding: 0 14px 0 12px !important;
+  border-radius: 40px !important;
+  background: #fbf6ee !important;
+  color: #2a2423 !important;
+  border: 1px solid rgba(200, 105, 58, 0.22) !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  box-shadow: 0 2px 6px rgba(42, 36, 35, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  font-family: inherit !important;
+  font-size: 0.95rem !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  outline: none !important;
+  width: auto !important;
+  min-width: auto !important;
+}
+.sainik-cat-pill-item:hover {
+  background: #ffffff !important;
+  border-color: #c8693a !important;
+  box-shadow: 0 4px 12px rgba(200, 105, 58, 0.2) !important;
+}
+.sainik-cat-pill-item.active {
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border-color: #c8693a !important;
+  box-shadow: 0 4px 14px rgba(200, 105, 58, 0.4) !important;
+}
+.sainik-cat-pill-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #2a2423 !important;
+  stroke: #2a2423 !important;
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+  line-height: 1 !important;
+}
+.sainik-cat-pill-icon svg {
+  stroke: currentColor !important;
+  width: 16px !important;
+  height: 16px !important;
+  display: block !important;
+}
+.sainik-cat-pill-item.active .sainik-cat-pill-icon,
+.sainik-cat-pill-item.active .sainik-cat-pill-icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+.sainik-cat-pill-name {
+  display: inline-block !important;
+  font-family: var(--font-heading, "Cormorant", serif) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  color: inherit !important;
+  letter-spacing: 0.2px !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.sainik-cat-pill-item .cat-pill-count {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(200, 105, 58, 0.14) !important;
+  color: #9e4b24 !important;
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  padding: 2px 6px !important;
+  border-radius: 12px !important;
+  margin-left: 2px !important;
+  line-height: 1 !important;
+  height: 18px !important;
+  box-sizing: border-box !important;
+}
+.sainik-cat-pill-item.active .cat-pill-count {
+  background: rgba(255, 255, 255, 0.28) !important;
+  color: #ffffff !important;
+}
+body.dark-mode .sainik-cat-pill-all,
+body.dark-mode .sainik-cat-pill-item {
+  background: #231b18 !important;
+  color: #f5ebe6 !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+body.dark-mode .sainik-cat-pill-all .sainik-pill-all-icon,
+body.dark-mode .sainik-cat-pill-all .sainik-pill-all-svg,
+body.dark-mode .sainik-cat-pill-item .sainik-cat-pill-icon,
+body.dark-mode .sainik-cat-pill-item .sainik-cat-pill-icon svg {
+  color: #f5ebe6 !important;
+  stroke: #f5ebe6 !important;
+}
+body.dark-mode .sainik-cat-pill-item .cat-pill-count {
+  background: rgba(200, 105, 58, 0.25) !important;
+  color: #ffaa7d !important;
+}
+body.dark-mode .sainik-cat-pill-all.active,
+body.dark-mode .sainik-cat-pill-item.active {
+  background: #c8693a !important;
+  color: #ffffff !important;
+  border-color: #c8693a !important;
+}
+body.dark-mode .sainik-cat-pill-all.active .sainik-pill-all-svg,
+body.dark-mode .sainik-cat-pill-item.active .sainik-cat-pill-icon svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+body.dark-mode .sainik-cat-pill-all.active .sainik-pill-all-text,
+body.dark-mode .sainik-cat-pill-item.active .sainik-cat-pill-name {
+  color: #ffffff !important;
+}
+body.wp-singular,
+body {
+  padding-bottom: 90px !important;
+}
+
 .sainik-floating-bar {
   position: fixed !important;
   bottom: 16px !important;
